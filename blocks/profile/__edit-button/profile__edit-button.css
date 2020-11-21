@@ -1,0 +1,15 @@
+.profile__edit-button {
+    flex-wrap: nowrap;
+    margin: 37px auto auto 0;
+    border-radius: 2px;
+  
+}
+.profile__edit-button:hover {
+    cursor: pointer;
+    opacity: .6;
+}
+
+@media screen and (max-width: 320px){
+    .profile__edit-button {
+        width: 18px;
+        margin: 30.25px auto auto 10px;}}
