@@ -34,3 +34,16 @@ function togglePopupVisibility() {
 formElement.forEach((formNode) => {
     formNode.addEventListener('submit', formSubmitHandler );
 });
+
+let like = document.querySelectorAll('.element__like');
+console.log (like);
+function getlike (like) {
+    like.classList.toggle ('element__getLike');}
+for (let i = 0; i < like.length; i++) {
+                like[i].addEventListener('click', 
+                function(e){
+                    getlike(e.currentTarget);
+                });};
+   
+    
+
