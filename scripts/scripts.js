@@ -4,9 +4,9 @@ let nameInput = document.querySelector('.profile__name');
 
 let jobInput = document.querySelector('.profile__about');
 
-let formInput1 = document.querySelector('.popup__input_name');
+let formInput1 = document.querySelector('.popup__input_form_name');
 
-let formInput2 = document.querySelector('.popup__input_about');
+let formInput2 = document.querySelector('.popup__input_form_about');
 formInput1.value = nameInput.textContent;
 formInput2.value = jobInput.textContent;
 
@@ -28,9 +28,16 @@ popupCloseBtn.addEventListener('click', togglePopupVisibility);
 formBtn.addEventListener('click', togglePopupVisibility);
 
 function togglePopupVisibility() {
-    popup.classList.toggle('popup__visible');
+    popup.classList.toggle('popup_visible');
+    
 }
 
+function formResetHandlerCloseBtn(evt) {
+evt.preventDefault();
+formInput1.value = nameInput.textContent;
+formInput2.value = jobInput.textContent;}
+
+popupCloseBtn.addEventListener('click', formResetHandlerCloseBtn);
 formElement.forEach((formNode) => {
     formNode.addEventListener('submit', formSubmitHandler );
 });
@@ -43,7 +50,4 @@ for (let i = 0; i < like.length; i++) {
                 like[i].addEventListener('click', 
                 function(e){
                     getlike(e.currentTarget);
-                });};
-   
-    
-
+                });}; 
