@@ -7,13 +7,14 @@
     margin: 51px auto 0 auto;
 }
 @media screen and (max-width: 1075px){
-    .elements { max-width: 650px;    
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: auto;}}
+.elements {
+    max-width: 650px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;}}
 
 @media screen and (max-width: 660px){
-    .elements { 
-                width: 88.125%;
-                max-width: 282px;
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;}}
+.elements { 
+    width: 88.125%;
+    max-width: 282px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;}}
