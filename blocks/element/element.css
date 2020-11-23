@@ -7,6 +7,6 @@
     position: relative;}
     
 .element:nth-child(even) {
-        justify-self: start;
-    }
+    justify-self: start;
+}
     

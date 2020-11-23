@@ -4,3 +4,4 @@
 Технологии использованные в проекте: css, html, js
 
 Павел Кузьмичев
+https://pavelkuzmichev.github.io/mesto/index.html
