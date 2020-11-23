@@ -6,6 +6,9 @@
     background-repeat: no-repeat;
     background-color: transparent;
     cursor: pointer;
+    outline: none;
+    background-image: url(../../../images/like.jpg);
+    border: none;
     padding: 0;
     bottom: 29.87px;
     right: 22.24px;

@@ -4,9 +4,9 @@ let nameInput = document.querySelector('.profile__name');
 
 let jobInput = document.querySelector('.profile__about');
 
-let formInput1 = document.querySelector('.popup__input-name');
+let formInput1 = document.querySelector('.popup__input_name');
 
-let formInput2 = document.querySelector('.popup__input-about');
+let formInput2 = document.querySelector('.popup__input_about');
 formInput1.value = nameInput.textContent;
 formInput2.value = jobInput.textContent;
 
@@ -28,7 +28,7 @@ popupCloseBtn.addEventListener('click', togglePopupVisibility);
 formBtn.addEventListener('click', togglePopupVisibility);
 
 function togglePopupVisibility() {
-    popup.classList.toggle('popup_visible');
+    popup.classList.toggle('popup__visible');
 }
 
 formElement.forEach((formNode) => {
@@ -38,7 +38,7 @@ formElement.forEach((formNode) => {
 let like = document.querySelectorAll('.element__like');
 console.log (like);
 function getlike (like) {
-    like.classList.toggle ('element__getLike');}
+    like.classList.toggle ('element__like_active');}
 for (let i = 0; i < like.length; i++) {
                 like[i].addEventListener('click', 
                 function(e){
