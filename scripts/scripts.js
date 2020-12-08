@@ -20,7 +20,7 @@ function formSubmitHandler(evt) {
 }
 
 let profileEditBtn = document.querySelector(".profile__edit-button");
-let popup = document.querySelector(".popup__edit-profile");
+let popup = document.querySelector(".popup_edit-profile");
 let popupCloseBtn = document.querySelector(".popup__close-btn_edit-profile");
 let formBtn = document.querySelector(".popup__submit-btn_edit-profile");
 
@@ -47,7 +47,7 @@ formElement.forEach((formNode) => {
 
 //функция открытия и закрытия попапа добавления новой карточки.
 const addNewCardBtn = document.querySelector(".profile__add-button");
-const popupAddElement = document.querySelector(".popup__add-element");
+const popupAddElement = document.querySelector(".popup_add-element");
 addNewCardBtn.addEventListener("click", togglePopupVisibility2);
 const popupCloseBtnAddElement = document.querySelector(".popup__close-btn_add-new-element");
 popupCloseBtnAddElement.addEventListener("click", togglePopupVisibility2);
