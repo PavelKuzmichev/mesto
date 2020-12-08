@@ -20,7 +20,7 @@ function formSubmitHandler(evt) {
 }
 
 let profileEditBtn = document.querySelector(".profile__edit-button");
-let popup = document.querySelector(".popup__design-edit-profile");
+let popup = document.querySelector(".popup__edit-profile");
 let popupCloseBtn = document.querySelector(".popup__close-btn_edit-profile");
 let formBtn = document.querySelector(".popup__submit-btn_edit-profile");
 
@@ -47,7 +47,7 @@ formElement.forEach((formNode) => {
 
 //функция открытия и закрытия попапа добавления новой карточки.
 const addNewCardBtn = document.querySelector(".profile__add-button");
-const popupAddElement = document.querySelector(".popup__design_add-element");
+const popupAddElement = document.querySelector(".popup__add-element");
 addNewCardBtn.addEventListener("click", togglePopupVisibility2);
 const popupCloseBtnAddElement = document.querySelector(".popup__close-btn_add-new-element");
 popupCloseBtnAddElement.addEventListener("click", togglePopupVisibility2);
@@ -149,7 +149,7 @@ function zoom(item) {
     }
 const closeBtnZoomImg = document.querySelector(".popup__close-btn_zoom-image");
 closeBtnZoomImg.addEventListener("click", togglePopupVisibility3);
-const popupZoomImage = document.querySelector(".popup__design_zoom");
+const popupZoomImage = document.querySelector(".popup__zoom");
 function zoomingImg(e) {
     const zoomedImg = document.querySelector(".popup__image-zoom");
     zoomedImg.src = e.target.src;
