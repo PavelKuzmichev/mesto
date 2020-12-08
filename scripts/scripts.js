@@ -149,7 +149,7 @@ function zoom(item) {
     }
 const closeBtnZoomImg = document.querySelector(".popup__close-btn_zoom-image");
 closeBtnZoomImg.addEventListener("click", togglePopupVisibility3);
-const popupZoomImage = document.querySelector(".popup__zoom");
+const popupZoomImage = document.querySelector(".popup_zoom");
 function zoomingImg(e) {
     const zoomedImg = document.querySelector(".popup__image-zoom");
     zoomedImg.src = e.target.src;
