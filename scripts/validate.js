@@ -49,7 +49,10 @@ function enableValidation() {
     const forms = document.querySelectorAll('.popup__form');
     forms.forEach(form => {
         setEventListener(form);
+        const submitBtn = form.querySelector('.popup__submit-btn');
+    setButtonState(submitBtn, form.checkValidity());
     })
+    
 }
 
 enableValidation();

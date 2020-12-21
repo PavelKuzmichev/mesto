@@ -33,7 +33,7 @@
         <div class="popup__window">
             <h2 class="popup__title">Редактировать профиль</h2>
             <button type="button" class="popup__close-btn popup__close-btn_edit-profile"></button>
-            <form name="subscribe-form" class="popup__form" novalidate>
+            <form name="subscribe-form-profile" class="popup__form" novalidate>
                 <input autocomplete='off' required minlength="2" maxlength="40" type="text" value="" id="name-card"
                     placeholder="Имя" name="name" class="popup__input popup__input_form_name" />
                 <span id="name-card-error" class="popup__error popup__error_area_name"></span>
@@ -48,11 +48,11 @@
         <div class="popup__window">
             <h2 class="popup__title">Новое место</h2>
             <button type="button" class="popup__close-btn popup__close-btn_add-new-element"></button>
-            <form name="subscribe-form" class="popup__form" novalidate>
+            <form name="subscribe-form-card" class="popup__form" novalidate>
                 <input autocomplete='off' required minlength="2" maxlength="40" type="text" id="title-card"
-                    value="Название" placeholder="Название" name="title" class="popup__input popup__input_form_title" />
+                    value="" placeholder="Название" name="title" class="popup__input popup__input_form_title" />
                 <span id="title-card-error" class="popup__error popup__error_area_title"></span>
-                <input autocomplete='off' required type="url" id="link-card" value="Ссылка на картинку"
+                <input autocomplete='off' required type="url" id="link-card" value=""
                     placeholder="Ссылка на картинку" name="link" class="popup__input popup__input_form_link" />
                 <span id="link-card-error" class="popup__error popup__error_area_link"></span>
                 <button type="submit" class="popup__submit-btn popup__submit-btn_add-element">Сохранить</button>
@@ -76,6 +76,7 @@
         </div>
     </template>
     <script src="./scripts/validate.js"></script>
+    <script src="./scripts/initialCards.js"></script>
     <script src="./scripts/scripts.js"></script>
 </body>
 
