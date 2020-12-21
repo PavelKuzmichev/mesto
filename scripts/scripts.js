@@ -16,6 +16,8 @@ const formInputLink = document.querySelector(".popup__input_form_link");
 
 function formSubmitHandler(evt) {
     evt.preventDefault();
+    
+    
 };
 
 
@@ -49,16 +51,14 @@ popupCloseBtnEditProfile.addEventListener("click", function () {
 
 formBtnEditProfile.addEventListener("click", function () {
     closePopup(popupEditProfile);
-    nameInput.textContent = formInputName.value;
-    jobInput.textContent = formInputAbout.value;
+    
 });
 
 
 
 
 forms.forEach((formNode) => {
-    formNode.addEventListener("submit", formSubmitHandler);
-});
+    formNode.addEventListener("submit", formSubmitHandler)})
 
 
 
@@ -88,8 +88,8 @@ popupCloseBtnAddElement.addEventListener("click", function () {
 
     const createButtonElement = document.querySelector(".popup__submit-btn_add-element");
     createButtonElement.addEventListener('click', () => {
-        addNewItem();
-        closePopup(popupAddElement);
+               closePopup(popupAddElement);
+               
     });
 
 
@@ -167,6 +167,13 @@ function closeByClick (e) {
         if (e.target.classList.contains('popup_visible')) { closePopup(e.target) }
         };
 
-
+        const submitProfile = document.querySelector('.popup__form_area_editprofile');
+        const submitNewCard = document.querySelector('.popup__form_area_newcard');
+        
+        submitProfile.addEventListener('submit', function () {
+            nameInput.textContent = formInputName.value;
+            jobInput.textContent = formInputAbout.value;
+        })
+        submitNewCard.addEventListener('submit',function () {addNewItem()});
 
 renderList(); 
