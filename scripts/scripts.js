@@ -166,9 +166,9 @@ formProfile.addEventListener('submit', function () {
     jobInput.textContent = formInputAbout.value;
     closePopup(popupEditProfile);
 })
-formNewCard.addEventListener('submit', function () { 
+formNewCard.addEventListener('submit', function () {
     addNewItem();
     closePopup(popupAddElement);
- });
+});
 
 renderList(); 
