@@ -16,8 +16,8 @@ const formInputLink = document.querySelector(".popup__input_form_link");
 
 function formSubmitHandler(evt) {
     evt.preventDefault();
-    
-    
+
+
 };
 
 
@@ -49,16 +49,9 @@ popupCloseBtnEditProfile.addEventListener("click", function () {
     closePopup(popupEditProfile);
 });
 
-formBtnEditProfile.addEventListener("click", function () {
-    closePopup(popupEditProfile);
-    
-});
-
-
-
-
 forms.forEach((formNode) => {
-    formNode.addEventListener("submit", formSubmitHandler)})
+    formNode.addEventListener("submit", formSubmitHandler)
+})
 
 
 
@@ -69,11 +62,11 @@ const addNewCardBtn = document.querySelector(".profile__add-button");
 const popupAddElement = document.querySelector(".popup_add-element");
 addNewCardBtn.addEventListener("click", function () {
     openPopup(popupAddElement);
-    formInputTitle.value = ''; 
+    formInputTitle.value = '';
     formInputLink.value = '';
-   
-    
-    
+    enableValidation(ValidationConfig);
+
+
 });
 const popupCloseBtnAddElement = document.querySelector(".popup__close-btn_add-new-element");
 
@@ -86,11 +79,8 @@ popupCloseBtnAddElement.addEventListener("click", function () {
 
 //функция создания новой карточки с данными от пользователя. 
 
-    const createButtonElement = document.querySelector(".popup__submit-btn_add-element");
-    createButtonElement.addEventListener('click', () => {
-               closePopup(popupAddElement);
-               
-    });
+const createButtonElement = document.querySelector(".popup__submit-btn_add-element");
+
 
 
 function addNewItem() {
@@ -157,23 +147,28 @@ function zoomingImg(e) {
 }
 //Функции закрытия попап по ESC и по клику вне окна.
 
-function closeByEsc (e) {
-        if (e.keyCode === 27 && document.querySelector('.popup_visible')) {
-            const popupActive = document.querySelector('.popup_visible');
-            closePopup(popupActive);
-        }};
+function closeByEsc(e) {
+    if (e.keyCode === 27 && document.querySelector('.popup_visible')) {
+        const popupActive = document.querySelector('.popup_visible');
+        closePopup(popupActive);
+    }
+};
 
-function closeByClick (e) {
-        if (e.target.classList.contains('popup_visible')) { closePopup(e.target) }
-        };
+function closeByClick(e) {
+    if (e.target.classList.contains('popup_visible')) { closePopup(e.target) }
+};
 
-        const submitProfile = document.querySelector('.popup__form_area_editprofile');
-        const submitNewCard = document.querySelector('.popup__form_area_newcard');
-        
-        submitProfile.addEventListener('submit', function () {
-            nameInput.textContent = formInputName.value;
-            jobInput.textContent = formInputAbout.value;
-        })
-        submitNewCard.addEventListener('submit',function () {addNewItem()});
+const formProfile = document.querySelector('.popup__form_area_editprofile');
+const formNewCard = document.querySelector('.popup__form_area_newcard');
+
+formProfile.addEventListener('submit', function () {
+    nameInput.textContent = formInputName.value;
+    jobInput.textContent = formInputAbout.value;
+    closePopup(popupEditProfile);
+})
+formNewCard.addEventListener('submit', function () { 
+    addNewItem();
+    closePopup(popupAddElement);
+ });
 
 renderList(); 

@@ -8,7 +8,7 @@ function showError(form, input, config) {
     input.classList.add(config.errorClass);
 }
 
-function hideError(form, input, config ) {
+function hideError(form, input, config) {
     const error = form.querySelector(`#${input.id}-error`);
     error.textContent = input.validationMessage;
     input.classList.remove(config.errorClass);
@@ -36,7 +36,7 @@ function setButtonState(button, isActive, config) {
 function setEventListener(form, config) {
     const inputList = form.querySelectorAll(config.inputSelector);
     const submitBtn = form.querySelector(config.submitButtonSelector);
-     inputList.forEach(input => {
+    inputList.forEach(input => {
         input.addEventListener('input', (evt) => {
             checkInputValidity(form, input, config);
             setButtonState(submitBtn, form.checkValidity(), config);
@@ -52,7 +52,7 @@ function enableValidation(config) {
         const submitBtn = form.querySelector(config.submitButtonSelector);
         setButtonState(submitBtn, form.checkValidity(), config);
     })
-    
+
 }
 const ValidationConfig = {
     formSelector: '.popup__form',
@@ -60,6 +60,6 @@ const ValidationConfig = {
     submitButtonSelector: '.popup__submit-btn',
     inactiveButtonClass: 'popup__submit-btn_invalid',
     errorClass: 'popup__input_invalid'
-  };
-  
+};
+
 enableValidation(ValidationConfig);
