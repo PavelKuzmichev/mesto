@@ -60,14 +60,18 @@ forms.forEach((formNode) => {
 
 const addNewCardBtn = document.querySelector(".profile__add-button");
 const popupAddElement = document.querySelector(".popup_add-element");
-addNewCardBtn.addEventListener("click", function () {
-    openPopup(popupAddElement);
+addNewCardBtn.addEventListener("click", () => {
+    
     formInputTitle.value = '';
     formInputLink.value = '';
-    enableValidation(ValidationConfig);
+    setButtonState(createButtonElement, formNewCard.checkValidity(), ValidationConfig);
+    openPopup(popupAddElement);
+    
+    
 
 
 });
+
 const popupCloseBtnAddElement = document.querySelector(".popup__close-btn_add-new-element");
 
 popupCloseBtnAddElement.addEventListener("click", function () {
