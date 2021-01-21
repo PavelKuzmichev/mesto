@@ -1,12 +1,10 @@
-export class Card {
-    constructor(name, link, alt, listContainerElement, zoomingImg) {
+export default class Card {
+    constructor(name, link, clickImage) {
         this._name = name;
         this._link = link;
-        this._alt = alt;
-        this._zoomingImg = zoomingImg;
-        this._listContainerElement = listContainerElement;
-
-    }
+        this._alt = this._name;
+        this._clickImage = clickImage;
+            }
 
     _getTemplate() {
         const cardElement = document
@@ -18,9 +16,9 @@ export class Card {
         return cardElement;
     }
     _setListenersToItem() {
-        this._element.querySelector(".element__remove").addEventListener("click", this._removeItem);
+        this._element.querySelector(".element__remove").addEventListener("click", () =>{ this._removeItem()});
         this._element.querySelector(".element__like").addEventListener("click", this._likeItem);
-        this._element.querySelector(".element__image").addEventListener("click", this._zoomingImg);
+        this._element.querySelector(".element__image").addEventListener("click", this._clickImage);
     }
 
 
@@ -28,10 +26,10 @@ export class Card {
         event.target.classList.toggle("element__like_active");
     }
 
-    _removeItem(event) {
-        event.target.closest(".element").remove();
-
-    }
+    _removeItem() {
+        this._element.remove();
+        this._element = null;
+            }
 
     generateCard() {
         this._element = this._getTemplate();
@@ -43,7 +41,3 @@ export class Card {
         return this._element;
     }
 }
-
-
-
-
