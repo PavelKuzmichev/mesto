@@ -5,12 +5,13 @@ export default class FormValidator {
         this._form = document.querySelector(formSelector);
         this._inputList = this._form.querySelectorAll(config.inputSelector);
         this._button = this._form.querySelector(config.submitButtonSelector);
+        console.log(this._button)
         
     }
     clearSpanError() {
-        const error = document.querySelectorAll(".popup__error"); 
+        const errors = document.querySelectorAll(".popup__error"); 
         this._inputList.forEach((input) => input.classList.remove(this._config.errorClass));
-        error.forEach((error) => error.textContent = "");
+        errors.forEach((error) => error.textContent = "");
   }
   
 
