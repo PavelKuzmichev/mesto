@@ -6,6 +6,7 @@ const ValidationConfig = {
     submitButtonSelector: ".popup__submit-btn",
     inactiveButtonClass: "popup__submit-btn_invalid",
     errorClass: "popup__input_invalid",
+    errorSelector: ".popup__error",
 };
 const forms = document.querySelectorAll(".popup__form");
 const nameInput = document.querySelector(".profile__name");
@@ -112,4 +113,3 @@ formNewCard.addEventListener("submit", function () {
     listContainerElement.append(addNewItem(formInputTitle.value, formInputLink.value));
     closePopup(popupAddElement);
 });
-
