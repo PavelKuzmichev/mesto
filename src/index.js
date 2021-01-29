@@ -49,8 +49,8 @@ const popupCloseBtnEditProfile = document.querySelector(".popup__close-btn_edit-
 profileEditBtn.addEventListener("click", function () {
     formInputName.value = nameInput.textContent;
     formInputAbout.value = jobInput.textContent;
-    formValidatorAuthor.clearSpanError(formProfile);
-    formValidatorAuthor.setButtonState(editProfileButton, formProfile.checkValidity());
+    formValidatorAuthor.clearSpanError();
+    formValidatorAuthor.setButtonState();
     openPopup(popupEditProfile);
 });
 popupCloseBtnEditProfile.addEventListener("click", function () {
@@ -69,8 +69,8 @@ const createButtonElement = document.querySelector(".popup__submit-btn_add-eleme
 const editProfileButton = document.querySelector(".popup__submit-btn_edit-profile");
 addNewCardBtn.addEventListener("click", () => {
     formNewCard.reset();
-    formValidatorCard.clearSpanError(formNewCard);
-    formValidatorCard.setButtonState(createButtonElement, formNewCard.checkValidity());
+    formValidatorCard.clearSpanError();
+    formValidatorCard.setButtonState();
     openPopup(popupAddElement);
 });
 const popupCloseBtnAddElement = document.querySelector(".popup__close-btn_add-new-element");
