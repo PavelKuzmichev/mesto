@@ -1,7 +1,7 @@
-import "../pages/index.css"
-import Card from "../scripts/Card.js";
-import FormValidator from "../scripts/FormValidator.js";
-import { initialCards } from "../scripts/initialCards.js";
+import "./pages/index.css"
+import Card from "./scripts/Card.js";
+import FormValidator from "./scripts/FormValidator.js";
+import { initialCards } from "./scripts/initialCards.js";
 const ValidationConfig = {
     inputSelector: ".popup__input",
     submitButtonSelector: ".popup__submit-btn",
