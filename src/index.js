@@ -3,22 +3,8 @@ import Card from "./scripts/Card.js";
 import FormValidator from "./scripts/FormValidator.js";
 import { initialCards } from "./scripts/initialCards.js";
 import Section from "./scripts/Section.js";
+//import {Popup} from "./scripts/Popup.js"
 export const listContainerElement = ".elements";
-
-const cardList = new Section({
-    data: initialCards
-  },addNewItem, listContainerElement);
-  
-  cardList.renderItems();
-
-
-
-
-
-
-
-
-
 
 const ValidationConfig = {
     inputSelector: ".popup__input",
@@ -41,16 +27,29 @@ const formValidatorAuthor = new FormValidator(ValidationConfig, ".popup__form_ar
 formValidatorCard.enableValidation();
 formValidatorAuthor.enableValidation();
 //функция создания стоковых карточек.
-//const listContainerElement = document.querySelector(".elements");
-/*initialCards.forEach((item) => {
-    listContainerElement.append(addNewItem(item.name, item.link));
-});*/
+const cardsList = new Section({
+    data: initialCards,
+    renderer: (item) => {
+        const card = new Card(item.name, item.link, clickImage);
+        const cardElement = card.generateCard();
+        cardsList.setItem(cardElement);
+    }}
+  ,
+  listContainerElement)
+;
+
+cardsList.renderItems(); 
 //функция создания новой карточки с данными от пользователя.
 function addNewItem(title, link) {
     const card = new Card(title, link, clickImage);
     return card.generateCard();
 }
 //функции открытия/закрытия попапа.
+/*function openPopup(popup) {
+    popup.classList.add("popup_visible");
+    document.addEventListener("keydown", closeByEsc);
+    document.addEventListener("click", closeByClick);
+}*/
 function openPopup(popup) {
     popup.classList.add("popup_visible");
     document.addEventListener("keydown", closeByEsc);
@@ -61,6 +60,7 @@ function closePopup(popup) {
     document.removeEventListener("keydown", closeByEsc);
     document.removeEventListener("click", closeByClick);
 }
+//const openPopup11 = new Popup ();
 //функция попап редактирования профиля.
 const profileEditBtn = document.querySelector(".profile__edit-button");
 const popupEditProfile = document.querySelector(".popup_edit-profile");
@@ -130,11 +130,21 @@ formProfile.addEventListener("submit", function () {
     jobInput.textContent = formInputAbout.value;
     closePopup(popupEditProfile);
 });
-formNewCard.addEventListener("submit", function () {
-    const  xX = document.querySelector('.profile__form')
-    const cardList1 = new Section({
-        data: xX
-      },addNewItem, listContainerElement);
-      cardList1.setItem(addNewItem(formInputTitle.value, formInputLink.value));
+formNewCard.addEventListener("submit",  () => {
+    const  profileForm = [
+        {
+            name:  formInputTitle.value,
+            link: formInputLink.value
+        }];
+    const userCard = new Section({
+        data: profileForm,
+        renderer: (item) => {
+              const card = new Card(item.name, item.link, clickImage);
+            const userCardElement = card.generateCard();
+            userCard.setItem(userCardElement);
+        }}
+      ,
+      listContainerElement)
+      userCard.renderItems();
     closePopup(popupAddElement);
 });
