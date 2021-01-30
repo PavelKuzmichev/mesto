@@ -2,12 +2,31 @@ import "./pages/index.css"
 import Card from "./scripts/Card.js";
 import FormValidator from "./scripts/FormValidator.js";
 import { initialCards } from "./scripts/initialCards.js";
+import Section from "./scripts/Section.js";
+export const listContainerElement = ".elements";
+
+const cardList = new Section({
+    data: initialCards
+  },addNewItem, listContainerElement);
+  
+  cardList.renderItems();
+
+
+
+
+
+
+
+
+
+
 const ValidationConfig = {
     inputSelector: ".popup__input",
     submitButtonSelector: ".popup__submit-btn",
     inactiveButtonClass: "popup__submit-btn_invalid",
     errorClass: "popup__input_invalid",
     errorSelector: ".popup__error",
+    
 };
 
 const forms = document.querySelectorAll(".popup__form");
@@ -22,10 +41,10 @@ const formValidatorAuthor = new FormValidator(ValidationConfig, ".popup__form_ar
 formValidatorCard.enableValidation();
 formValidatorAuthor.enableValidation();
 //функция создания стоковых карточек.
-const listContainerElement = document.querySelector(".elements");
-initialCards.forEach((item) => {
+//const listContainerElement = document.querySelector(".elements");
+/*initialCards.forEach((item) => {
     listContainerElement.append(addNewItem(item.name, item.link));
-});
+});*/
 //функция создания новой карточки с данными от пользователя.
 function addNewItem(title, link) {
     const card = new Card(title, link, clickImage);
@@ -112,6 +131,10 @@ formProfile.addEventListener("submit", function () {
     closePopup(popupEditProfile);
 });
 formNewCard.addEventListener("submit", function () {
-    listContainerElement.append(addNewItem(formInputTitle.value, formInputLink.value));
+    const  xX = document.querySelector('.profile__form')
+    const cardList1 = new Section({
+        data: xX
+      },addNewItem, listContainerElement);
+      cardList1.setItem(addNewItem(formInputTitle.value, formInputLink.value));
     closePopup(popupAddElement);
 });
