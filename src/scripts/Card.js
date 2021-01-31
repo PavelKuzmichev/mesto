@@ -1,3 +1,4 @@
+
 export default class Card {
     constructor(name, link, clickImage) {
         this._name = name;
