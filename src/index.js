@@ -7,6 +7,7 @@ import PopupWithForm from './scripts/PopupWithForm.js';
 import Section from "./scripts/Section.js";
 import {Popup} from "./scripts/Popup.js"
 export const listContainerElement = ".elements";
+import UserInfo from './scripts/UserInfo.js'
 
 const ValidationConfig = {
     inputSelector: ".popup__input",
@@ -74,6 +75,7 @@ const openPopupEditProfile = new PopupWithForm (popupEditProfile, submitFormEdit
 profileEditBtn.addEventListener("click",  () => {
     formInputName.value = nameInput.textContent;
     formInputAbout.value = jobInput.textContent;
+   
     formValidatorAuthor.clearSpanError();
     formValidatorAuthor.setButtonState();
     openPopupEditProfile.open();
@@ -81,8 +83,7 @@ profileEditBtn.addEventListener("click",  () => {
 });
 const popupWithFormNewCard = new PopupWithForm(popupAddElement, submitFormAdd) 
 addNewCardBtn.addEventListener("click", () => {
-    //formNewCard.reset();
-    formValidatorCard.clearSpanError();
+   formValidatorCard.clearSpanError();
     formValidatorCard.setButtonState();
     
     popupWithFormNewCard.open();
@@ -109,16 +110,12 @@ const zoomedImg = document.querySelector(".popup__image-zoom");
 const zoomedTitle = document.querySelector(".popup__title-zoom");
 
 
-function clickImage() { 
-    const popupWithImage = new PopupWithImage (popupZoomImage, formInputName.value)
-      const xx = document.querySelector('.popup__window-zoom');
-    popupWithImage.open(xx); 
-} 
+
 
 const closeBtnZoomImg = document.querySelector(".popup__close-btn_zoom-image");
 
 closeBtnZoomImg.addEventListener("click", function () {
-    closePopup(popupZoomImage);
+    popupWithImage.close();
 });
 
 //Сабмиты
@@ -127,10 +124,18 @@ const formProfile = document.querySelector(".popup__form_area_editprofile");
 function submitFormEditProfile() {
     nameInput.textContent = formInputName.value;
     jobInput.textContent = formInputAbout.value;
+    /*console.log(nameInput.textContent)
+    const userInfo = new UserInfo(nameInput.textContent,jobInput.textContent)
+userInfo.getUserInfo()*/
     openPopupEditProfile.close();
 }
+const popupWithImage = new PopupWithImage (popupZoomImage)
 
-
+function clickImage(e) { 
+    
+    popupWithImage.open(e.target); 
+} 
+popupWithImage.setEventListeners()
 openPopupEditProfile.setEventListeners();
 popupWithFormNewCard.setEventListeners()
 
