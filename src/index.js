@@ -34,7 +34,7 @@ formValidatorAuthor.enableValidation();
 const cardsList = new Section({
     data: initialCards,
     renderer: (item) => {
-        const card = new Card(item.name, item.link, clickImage);
+        const card = new Card(item, clickImage);
         const cardElement = card.generateCard();
         cardsList.setItem(cardElement);
     }}
@@ -42,27 +42,26 @@ const cardsList = new Section({
   listContainerElement)
 ;
 
+  
+
 cardsList.renderItems(); 
 
 //функция создания новой карточки с данными от пользователя.
-function submitFormAdd ()  {
-    const  profileForm = [
-        {
-            name:  formInputTitle.value,
-            link: formInputLink.value
-        }];
-    const userCard = new Section({
-        data: profileForm,
-        renderer: (item) => {
-              const card = new Card(item.name, item.link, clickImage);
-            const userCardElement = card.generateCard();
-            userCard.setItem(userCardElement);
-        }}
-      ,
-      listContainerElement)
-      userCard.renderItems();
-      popupWithFormNewCard.close();
+const formProfile = document.querySelector(".popup__form_area_editprofile");
+function submitFormEditProfile() {
+    nameInput.textContent = formInputName.value;
+    jobInput.textContent = formInputAbout.value;
+    openPopupEditProfile.close();
 }
+function submitFormAdd (item)  {
+    const card = new Card(item, clickImage);    
+    const userCardElement = card.generateCard();
+    cardsList.setItem(userCardElement);
+    
+        
+      popupWithFormNewCard.close();}
+      
+
 //функции открытия/закрытия попапа.
 const profileEditBtn = document.querySelector(".profile__edit-button");
 const popupEditProfile = document.querySelector(".popup_edit-profile");
@@ -120,22 +119,14 @@ closeBtnZoomImg.addEventListener("click", function () {
 
 //Сабмиты
 
-const formProfile = document.querySelector(".popup__form_area_editprofile");
-function submitFormEditProfile() {
-    nameInput.textContent = formInputName.value;
-    jobInput.textContent = formInputAbout.value;
-    /*console.log(nameInput.textContent)
-    const userInfo = new UserInfo(nameInput.textContent,jobInput.textContent)
-userInfo.getUserInfo()*/
-    openPopupEditProfile.close();
-}
+
 const popupWithImage = new PopupWithImage (popupZoomImage)
 
 function clickImage(e) { 
     
     popupWithImage.open(e.target); 
 } 
-popupWithImage.setEventListeners()
+popupWithImage.setEventListeners();
 openPopupEditProfile.setEventListeners();
-popupWithFormNewCard.setEventListeners()
+popupWithFormNewCard.setEventListeners();
 

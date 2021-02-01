@@ -1,8 +1,8 @@
 
 export default class Card {
-    constructor(name, link, clickImage) {
-        this._name = name;
-        this._link = link;
+    constructor(data, clickImage) {
+        this._title = data.title;
+        this._link = data.link;
         this._clickImage = clickImage;
     }
     _getTemplate() {
@@ -24,8 +24,8 @@ export default class Card {
     generateCard() {
         this._element = this._getTemplate();
         this._element.querySelector(".element__image").src = this._link;
-        this._element.querySelector(".element__image").alt = this._name;
-        this._element.querySelector(".element__title").textContent = this._name;
+        this._element.querySelector(".element__image").alt = this._title;
+        this._element.querySelector(".element__title").textContent = this._title;
         this._setListenersToItem();
         return this._element;
     }

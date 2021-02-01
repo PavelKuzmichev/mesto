@@ -5,7 +5,7 @@ export default class PopupWithImage extends Popup {
         super(popupSelector);
         this._image = this._popupSelector.querySelector('.popup__image-zoom');
         this._imageName = this._popupSelector.querySelector('.popup__title-zoom');
-       console.log(this._image)
+       
     }
         
         
@@ -16,15 +16,5 @@ export default class PopupWithImage extends Popup {
         this._image.alt = e.alt;
         this._imageName.textContent = this._image.alt;
     }
-    close(){
-        super.close()
-        
-
-    }
-    setEventListeners(){
-        super.setEventListeners()
-        
-        
-        
-    }
+   
 }
