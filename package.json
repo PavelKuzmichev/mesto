@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Проект представляет собой комбинацию усвоенных навыков во время обучения web-разработке. В том числе веhстка, работа с блоками, фоном, стилями, анимациями, файловой структурой БЭМ, DOM, Javascript\r Технологии использованные в проекте: css, html, js",
   "main": "index.js",
-  "scripts": {
+  "components": {
     "build": "webpack --mode production",
     "dev": "webpack serve"
   },
