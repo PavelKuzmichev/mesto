@@ -1,4 +1,3 @@
-
 export default class Card {
     constructor(data, clickImage) {
         this._title = data.title;
@@ -30,3 +29,4 @@ export default class Card {
         return this._element;
     }
 }
+

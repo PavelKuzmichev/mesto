@@ -1,13 +1,12 @@
-import "./pages/index.css"
+import "./pages/index.css";
 import Card from "./scripts/Card.js";
 import FormValidator from "./scripts/FormValidator.js";
 import { initialCards } from "./scripts/initialCards.js";
-import PopupWithImage from './scripts/PopupWithImage.js';
-import PopupWithForm from './scripts/PopupWithForm.js';
+import PopupWithImage from "./scripts/PopupWithImage.js";
+import PopupWithForm from "./scripts/PopupWithForm.js";
 import Section from "./scripts/Section.js";
-import {Popup} from "./scripts/Popup.js"
 export const listContainerElement = ".elements";
-import UserInfo from './scripts/UserInfo.js'
+import UserInfo from "./scripts/UserInfo.js";
 
 const ValidationConfig = {
     inputSelector: ".popup__input",
@@ -15,126 +14,111 @@ const ValidationConfig = {
     inactiveButtonClass: "popup__submit-btn_invalid",
     errorClass: "popup__input_invalid",
     errorSelector: ".popup__error",
-    
 };
 //константы
-const forms = document.querySelectorAll(".popup__form");
+
 const nameInput = document.querySelector(".profile__name");
 const jobInput = document.querySelector(".profile__about");
 const formInputName = document.querySelector(".popup__input_form_name");
 const formInputAbout = document.querySelector(".popup__input_form_about");
-const formInputTitle = document.querySelector(".popup__input_form_title");
-const formInputLink = document.querySelector(".popup__input_form_link");
+
 //валидация
 const formValidatorCard = new FormValidator(ValidationConfig, ".popup__form_area_newcard");
 const formValidatorAuthor = new FormValidator(ValidationConfig, ".popup__form_area_editprofile");
 formValidatorCard.enableValidation();
 formValidatorAuthor.enableValidation();
-//функция создания стоковых карточек.
-const cardsList = new Section({
-    data: initialCards,
-    renderer: (item) => {
-        const card = new Card(item, clickImage);
-        const cardElement = card.generateCard();
-        cardsList.setItem(cardElement);
-    }}
-  ,
-  listContainerElement)
-;
+//рендер стоковых карточек
+const cardsList = new Section(
+    {
+        data: initialCards,
+        renderer: (item) => {
+            const card = new Card(item, clickImage);
+            const cardElement = card.generateCard();
+            cardsList.setItem(cardElement);
+        },
+    },
+    listContainerElement
+);
+cardsList.renderItems();
+
+//начальное заполнение формы редактирования профиля
 const userInfo = new UserInfo({
-    userNameSelector: nameInput, 
-    userDescriptionSelector: jobInput
-})
+    name: nameInput,
+    job: jobInput,
+});
 
-
-    
-
-cardsList.renderItems(); 
-//userInfo.setUserInfo()
-//функция создания новой карточки с данными от пользователя.
-const formProfile = document.querySelector(".popup__form_area_editprofile");
-
- function submitFormEditProfile(formData) {
-    console.log(formData)
+//Функция сабмита редактирования профиля
+function submitFormEditProfile(formObject) {
     userInfo.setUserInfo({
-        newUser: formData.name,
-        newDescription: formData.about
-        
-    })
-   
-
-          
-
-    /*nameInput.textContent = formInputName.value;
-    jobInput.textContent = formInputAbout.value;*/
-   
+        newUser: formObject.name,
+        newJob: formObject.about,
+    });
     openPopupEditProfile.close();
 }
-function submitFormAdd (item)  {
-    const card = new Card(item, clickImage);    
+//функция сабмита добавления новой карточки
+function submitFormAdd(item) {
+    const card = new Card(item, clickImage);
     const userCardElement = card.generateCard();
     cardsList.setItem(userCardElement);
-    
-        
-      popupWithFormNewCard.close();}
-                
-                
-      
-      
-//функции открытия/закрытия попапа.
+    popupWithFormNewCard.close();
+}
+
+//функции открытия для попапа...
 const profileEditBtn = document.querySelector(".profile__edit-button");
 const popupEditProfile = document.querySelector(".popup_edit-profile");
 const addNewCardBtn = document.querySelector(".profile__add-button");
 const popupAddElement = document.querySelector(".popup_add-element");
-const createButtonElement = document.querySelector(".popup__submit-btn_add-element");
-const editProfileButton = document.querySelector(".popup__submit-btn_edit-profile");
-const formNewCard = document.querySelector(".popup__form_area_newcard");
-const openPopupEditProfile = new PopupWithForm (popupEditProfile, submitFormEditProfile);
-profileEditBtn.addEventListener("click",  () => {
+//... редактировния профиля
+const openPopupEditProfile = new PopupWithForm(popupEditProfile, submitFormEditProfile);
+profileEditBtn.addEventListener("click", () => {
     const userInfoNew = userInfo.getUserInfo();
     formInputName.value = userInfoNew.userName;
     formInputAbout.value = userInfoNew.aboutMe;
     formValidatorAuthor.clearSpanError();
     formValidatorAuthor.setButtonState();
     openPopupEditProfile.open();
-    
 });
-const popupWithFormNewCard = new PopupWithForm(popupAddElement, submitFormAdd) 
+//... добавления новой карточки
+const popupWithFormNewCard = new PopupWithForm(popupAddElement, submitFormAdd);
 addNewCardBtn.addEventListener("click", () => {
-   formValidatorCard.clearSpanError();
+    formValidatorCard.clearSpanError();
     formValidatorCard.setButtonState();
-    
+
     popupWithFormNewCard.open();
 });
-
-//функция попапа добавления новой карточки.
-
-
-
-//функция попапа зум картинки.
+//... увеличенной картинки
 const popupZoomImage = document.querySelector(".popup_zoom");
-const zoomedImg = document.querySelector(".popup__image-zoom");
-const zoomedTitle = document.querySelector(".popup__title-zoom");
-
-
-
-
+const popupWithImage = new PopupWithImage(popupZoomImage);
+function clickImage(e) {
+    popupWithImage.open(e.target);
+}
+//слушатель закрытия попа зум-картинки
 const closeBtnZoomImg = document.querySelector(".popup__close-btn_zoom-image");
-
 closeBtnZoomImg.addEventListener("click", function () {
     popupWithImage.close();
 });
 
-//Сабмиты
-
-
-const popupWithImage = new PopupWithImage (popupZoomImage)
-
-function clickImage(e) { 
-    
-    popupWithImage.open(e.target); 
-} 
 popupWithImage.setEventListeners();
 openPopupEditProfile.setEventListeners();
 popupWithFormNewCard.setEventListeners();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
