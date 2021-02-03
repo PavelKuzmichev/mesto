@@ -1,8 +1,8 @@
 export default class Card {
-    constructor(data, clickImage) {
+    constructor(data, handleCardClick) {
         this._title = data.title;
         this._link = data.link;
-        this._clickImage = clickImage;
+        this._handleCardClick = handleCardClick;
     }
     _getTemplate() {
         const cardElement = document.querySelector(".template").content.querySelector(".element").cloneNode(true);
@@ -11,7 +11,7 @@ export default class Card {
     _setListenersToItem() {
         this._element.querySelector(".element__remove").addEventListener("click", () => this._removeItem());
         this._element.querySelector(".element__like").addEventListener("click", this._likeItem);
-        this._element.querySelector(".element__image").addEventListener("click", this._clickImage);
+        this._element.querySelector(".element__image").addEventListener("click", this._handleCardClick);
     }
     _likeItem(event) {
         event.target.classList.toggle("element__like_active");

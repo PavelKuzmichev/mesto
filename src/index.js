@@ -32,9 +32,9 @@ const cardsList = new Section(
     {
         data: initialCards,
         renderer: (item) => {
-            const card = new Card(item, clickImage);
+            const card = new Card(item, handleCardClick);
             const cardElement = card.generateCard();
-            cardsList.setItem(cardElement);
+            cardsList.addItem(cardElement);
         },
     },
     listContainerElement
@@ -57,9 +57,9 @@ function submitFormEditProfile(formObject) {
 }
 //функция сабмита добавления новой карточки
 function submitFormAdd(item) {
-    const card = new Card(item, clickImage);
+    const card = new Card(item, handleCardClick);
     const userCardElement = card.generateCard();
-    cardsList.setItem(userCardElement);
+    cardsList.addItem(userCardElement);
     popupWithFormNewCard.close();
 }
 
@@ -83,13 +83,12 @@ const popupWithFormNewCard = new PopupWithForm(popupAddElement, submitFormAdd);
 addNewCardBtn.addEventListener("click", () => {
     formValidatorCard.clearSpanError();
     formValidatorCard.setButtonState();
-
     popupWithFormNewCard.open();
 });
 //... увеличенной картинки
 const popupZoomImage = document.querySelector(".popup_zoom");
 const popupWithImage = new PopupWithImage(popupZoomImage);
-function clickImage(e) {
+function handleCardClick(e) {
     popupWithImage.open(e.target);
 }
 //слушатель закрытия попа зум-картинки
