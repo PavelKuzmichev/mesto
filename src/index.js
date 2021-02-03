@@ -41,16 +41,33 @@ const cardsList = new Section({
   ,
   listContainerElement)
 ;
+const userInfo = new UserInfo({
+    userNameSelector: nameInput, 
+    userDescriptionSelector: jobInput
+})
 
-  
+
+    
 
 cardsList.renderItems(); 
-
+//userInfo.setUserInfo()
 //функция создания новой карточки с данными от пользователя.
 const formProfile = document.querySelector(".popup__form_area_editprofile");
-function submitFormEditProfile() {
-    nameInput.textContent = formInputName.value;
-    jobInput.textContent = formInputAbout.value;
+
+ function submitFormEditProfile(formData) {
+    console.log(formData)
+    userInfo.setUserInfo({
+        newUser: formData.name,
+        newDescription: formData.about
+        
+    })
+   
+
+          
+
+    /*nameInput.textContent = formInputName.value;
+    jobInput.textContent = formInputAbout.value;*/
+   
     openPopupEditProfile.close();
 }
 function submitFormAdd (item)  {
@@ -60,8 +77,10 @@ function submitFormAdd (item)  {
     
         
       popupWithFormNewCard.close();}
+                
+                
       
-
+      
 //функции открытия/закрытия попапа.
 const profileEditBtn = document.querySelector(".profile__edit-button");
 const popupEditProfile = document.querySelector(".popup_edit-profile");
@@ -72,9 +91,9 @@ const editProfileButton = document.querySelector(".popup__submit-btn_edit-profil
 const formNewCard = document.querySelector(".popup__form_area_newcard");
 const openPopupEditProfile = new PopupWithForm (popupEditProfile, submitFormEditProfile);
 profileEditBtn.addEventListener("click",  () => {
-    formInputName.value = nameInput.textContent;
-    formInputAbout.value = jobInput.textContent;
-   
+    const userInfoNew = userInfo.getUserInfo();
+    formInputName.value = userInfoNew.userName;
+    formInputAbout.value = userInfoNew.aboutMe;
     formValidatorAuthor.clearSpanError();
     formValidatorAuthor.setButtonState();
     openPopupEditProfile.open();
@@ -87,18 +106,7 @@ addNewCardBtn.addEventListener("click", () => {
     
     popupWithFormNewCard.open();
 });
-//функция попап редактирования профиля.
 
-
-
-
-
-function formSubmitHandler(evt) {
-    evt.preventDefault();
-}
-forms.forEach((form) => {
-    form.addEventListener("submit", formSubmitHandler);
-});
 //функция попапа добавления новой карточки.
 
 

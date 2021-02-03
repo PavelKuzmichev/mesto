@@ -1,27 +1,53 @@
-export default class UserInfo 
+export default class UserInfo {
+    constructor({userNameSelector, userDescriptionSelector}){
+        this._userName = userNameSelector;
+        this._userDescription = userDescriptionSelector;
+    }
+    getUserInfo  () {
+        const userName = this._userName.textContent;
+        const aboutMe = this._userDescription.textContent;
+        console.log(this._userName.textContent)
+        return {userName : userName, aboutMe: aboutMe};
+    }
+    setUserInfo = ({newUser, newDescription}) =>{
+        this._userName.textContent = newUser;
+        this._userDescription.textContent = newDescription;
+    }
+} 
+
+
+
+/*export default class UserInfo 
 {
-    constructor (name, job)
-    {this._name = name;
-    this._job = job;
+    constructor(nameInput, jobInput) {
+        this._nameInput = nameInput;
+        this._jobInput = jobInput;
+        this._name = '';
+        this._job = ''; 
+       
+                     }
+                     setUserInfo = (newName, newJob) =>  {
+                        this._name = newName;
+                            this._job = newJob; 
+                            console.log(this._name)
+                            
+                    }
+              updateUserInfo = () => {
+                
+                this._nameInput.textcontent = this._name;
+                this._jobInput.textcontent = this._job;
+              console.log(this._name)
+               
+                }
+                
+            
+getUserInfo =  () => {
     
+    return {
+        name: this._name,
+        job: this._job
+    }
+      
 }
 
-getUserInfo (){
-    
-    /*const formInputName = document.querySelector(".popup__input_form_name");
-    this._name = formInputName.value;
-    console.log(this._name);
-    console.log(formInputName.value);
-    const formInputAbout = document.querySelector(".popup__input_form_about");
-    this._job = formInputAbout.value;
-    return formInputName.value*/
-}
-setUserInfo (){
-    this._inputList = this._element.querySelectorAll('.popup__input');
-    
-    this._formValues = {};
-    this._inputList.forEach(input => this._formValues[input.name,input.job] = input.value);
-    
-    return this._formValues;
-}
-}
+}*/
