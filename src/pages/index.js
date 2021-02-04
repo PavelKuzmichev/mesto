@@ -65,9 +65,7 @@ function submitFormAdd(item) {
 
 //функции открытия для попапа...
 const profileEditBtn = document.querySelector(".profile__edit-button");
-const popupEditProfile = document.querySelector(".popup_edit-profile");
 const addNewCardBtn = document.querySelector(".profile__add-button");
-const popupAddElement = document.querySelector(".popup_add-element");
 //... редактировния профиля
 const openPopupEditProfile = new PopupWithForm(".popup_edit-profile", submitFormEditProfile);
 profileEditBtn.addEventListener("click", () => {
@@ -86,7 +84,6 @@ addNewCardBtn.addEventListener("click", () => {
     popupWithFormNewCard.open();
 });
 //... увеличенной картинки
-const popupZoomImage = document.querySelector(".popup_zoom");
 const popupWithImage = new PopupWithImage(".popup_zoom");
 function handleCardClick(e) {
     popupWithImage.open(e.target);
