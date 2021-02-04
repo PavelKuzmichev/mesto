@@ -1,15 +1,13 @@
 import "./index.css";
-import Card from "../scripts/Card.js";
-import FormValidator from "../scripts/FormValidator.js";
-import { initialCards } from "../scripts/initialCards.js";
-import PopupWithImage from "../scripts/PopupWithImage.js";
-import PopupWithForm from "../scripts/PopupWithForm.js";
-import Section from "../scripts/Section.js";
-import UserInfo from "../scripts/UserInfo.js";
-export const listContainerElement = ".elements";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+import { initialCards } from "../components/initialCards.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
 
-
-const ValidationConfig = {
+const validationConfig = {
     inputSelector: ".popup__input",
     submitButtonSelector: ".popup__submit-btn",
     inactiveButtonClass: "popup__submit-btn_invalid",
@@ -24,21 +22,24 @@ const formInputName = document.querySelector(".popup__input_form_name");
 const formInputAbout = document.querySelector(".popup__input_form_about");
 
 //валидация
-const formValidatorCard = new FormValidator(ValidationConfig, ".popup__form_area_newcard");
-const formValidatorAuthor = new FormValidator(ValidationConfig, ".popup__form_area_editprofile");
+const formValidatorCard = new FormValidator(validationConfig, ".popup__form_area_newcard");
+const formValidatorAuthor = new FormValidator(validationConfig, ".popup__form_area_editprofile");
 formValidatorCard.enableValidation();
 formValidatorAuthor.enableValidation();
 //рендер стоковых карточек
+function createCard(item) {
+    const card = new Card(item, handleCardClick, ".template");
+    const cardElement = card.generateCard();
+    return cardElement;
+}
 const cardsList = new Section(
     {
         data: initialCards,
         renderer: (item) => {
-            const card = new Card(item, handleCardClick);
-            const cardElement = card.generateCard();
-            cardsList.addItem(cardElement);
+            cardsList.addItem(createCard(item));
         },
     },
-    listContainerElement
+    ".elements"
 );
 cardsList.renderItems();
 
@@ -58,9 +59,7 @@ function submitFormEditProfile(formObject) {
 }
 //функция сабмита добавления новой карточки
 function submitFormAdd(item) {
-    const card = new Card(item, handleCardClick);
-    const userCardElement = card.generateCard();
-    cardsList.addItem(userCardElement);
+    cardsList.addItem(createCard(item));
     popupWithFormNewCard.close();
 }
 
@@ -70,7 +69,7 @@ const popupEditProfile = document.querySelector(".popup_edit-profile");
 const addNewCardBtn = document.querySelector(".profile__add-button");
 const popupAddElement = document.querySelector(".popup_add-element");
 //... редактировния профиля
-const openPopupEditProfile = new PopupWithForm(popupEditProfile, submitFormEditProfile);
+const openPopupEditProfile = new PopupWithForm(".popup_edit-profile", submitFormEditProfile);
 profileEditBtn.addEventListener("click", () => {
     const userInfoNew = userInfo.getUserInfo();
     formInputName.value = userInfoNew.userName;
@@ -80,7 +79,7 @@ profileEditBtn.addEventListener("click", () => {
     openPopupEditProfile.open();
 });
 //... добавления новой карточки
-const popupWithFormNewCard = new PopupWithForm(popupAddElement, submitFormAdd);
+const popupWithFormNewCard = new PopupWithForm(".popup_add-element", submitFormAdd);
 addNewCardBtn.addEventListener("click", () => {
     formValidatorCard.clearSpanError();
     formValidatorCard.setButtonState();
@@ -88,19 +87,15 @@ addNewCardBtn.addEventListener("click", () => {
 });
 //... увеличенной картинки
 const popupZoomImage = document.querySelector(".popup_zoom");
-const popupWithImage = new PopupWithImage(popupZoomImage);
+const popupWithImage = new PopupWithImage(".popup_zoom");
 function handleCardClick(e) {
     popupWithImage.open(e.target);
 }
-//слушатель закрытия попа зум-картинки
-const closeBtnZoomImg = document.querySelector(".popup__close-btn_zoom-image");
-closeBtnZoomImg.addEventListener("click", function () {
-    popupWithImage.close();
-});
 
 popupWithImage.setEventListeners();
 openPopupEditProfile.setEventListeners();
 popupWithFormNewCard.setEventListeners();
+
 
 
 
