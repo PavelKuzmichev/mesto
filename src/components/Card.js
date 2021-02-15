@@ -1,9 +1,13 @@
 export default class Card {
-    constructor(data, handleCardClick, cardTemplate) {
-        this._title = data.title;
+    constructor(data, handleCardClick, cardTemplate, api) {
+        this._title = data.name;
         this._link = data.link;
+        this._id = data.owner._id;
         this._handleCardClick = handleCardClick;
         this._cardTemplate = document.querySelector(cardTemplate);
+        this._api = api;
+        console.log(this._id);
+        
     }
     _getTemplate() {
         const cardElement = this._cardTemplate.content.querySelector(".element").cloneNode(true);
@@ -18,8 +22,13 @@ export default class Card {
         event.target.classList.toggle("element__like_active");
     }
     _removeItem() {
-        this._element.remove();
-        this._element = null;
+        
+        this._api
+        .removeCard(this._id)
+        .then (()=>{
+            this._element.remove();
+            this._element = null;})
+        
     }
     generateCard() {
         this._element = this._getTemplate();

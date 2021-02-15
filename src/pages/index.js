@@ -6,7 +6,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-
+import Api from "../components/api.js"
 const validationConfig = {
     inputSelector: ".popup__input",
     submitButtonSelector: ".popup__submit-btn",
@@ -14,6 +14,29 @@ const validationConfig = {
     errorClass: "popup__input_invalid",
     errorSelector: ".popup__error",
 };
+const cardsList = new Section(
+    {
+        
+        renderer: (item) => {
+            cardsList.addItem(createCard(item));
+        },
+    },
+    ".elements"
+);
+
+//API
+const api = new Api ( 
+    {url: 'https://mesto.nomoreparties.co/v1/cohort-20/cards/',
+     headers: {
+         authorization: '4b4ac9ed-5313-4881-afac-1a610d770d12',
+         'Content-Type': 'application/json'}
+         }
+)
+api
+   .addAllCards()
+   .then((res)=> {
+       console.log(res)
+       cardsList.renderItems(res)})
 //константы
 
 const nameInput = document.querySelector(".profile__name");
@@ -28,38 +51,46 @@ formValidatorCard.enableValidation();
 formValidatorAuthor.enableValidation();
 //рендер стоковых карточек
 function createCard(item) {
-    const card = new Card(item, handleCardClick, ".template");
+    const card = new Card(item, handleCardClick, ".template", api);
     const cardElement = card.generateCard();
     return cardElement;
 }
-const cardsList = new Section(
-    {
-        data: initialCards,
-        renderer: (item) => {
-            cardsList.addItem(createCard(item));
-        },
-    },
-    ".elements"
-);
-cardsList.renderItems();
 
-//начальное заполнение формы редактирования профиля
+const userInfo1 = new  Api ( 
+    {url: 'https://mesto.nomoreparties.co/v1/cohort-20/users/me',
+     headers: {
+         authorization: '4b4ac9ed-5313-4881-afac-1a610d770d12',
+         'Content-Type': 'application/json'}
+         }
+)
 const userInfo = new UserInfo({
     name: nameInput,
     job: jobInput,
 });
+const avatarIcon = document.querySelector('.profile__avatar');
+userInfo1.addProfileInfo()
+.then(res=> {nameInput.textContent = res.name,
+    jobInput.textContent = res.about
+avatarIcon.src = res.avatar})
+//начальное заполнение формы редактирования профиля
+
 
 //Функция сабмита редактирования профиля
 function submitFormEditProfile(formObject) {
-    userInfo.setUserInfo({
-        newUser: formObject.name,
-        newJob: formObject.about,
-    });
+    userInfo1.editProfileInfo(formObject)
+    .then(res =>{
+        userInfo.setUserInfo({
+        newUser: res.name,
+        newJob: res.about
+    })});
     openPopupEditProfile.close();
 }
 //функция сабмита добавления новой карточки
 function submitFormAdd(item) {
-    cardsList.addItem(createCard(item));
+    api
+    .addCard(item)
+    .then(res =>{cardsList.addItem(createCard(res))})
+    
     popupWithFormNewCard.close();
 }
 
