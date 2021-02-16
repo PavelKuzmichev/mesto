@@ -29,15 +29,33 @@ export default class Api {
     })
   }
   removeCard(data) {
- console.log(data)
- console.log(data._id)
- console.log(data.id)
+ 
     return fetch(`${this._url}${data}`, {
       method: "DELETE",
       headers: this._headers,
     }).then(res => { return res.json() })
     
   }
+ ////////////////////////////////////////////////////// 
+likeCard (data) {
+ console.log(data)
+    return fetch(`${this._url}${data}`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then(res => { return res.json() })
+    
+  }
+
+
+disLikeCard (data) {
+ 
+  return fetch(`${this._url}${data}`, {
+    method: "DELETE",
+    headers: this._headers,
+  }).then(res => { return res.json() })
+  
+}
+///////////////////////////////////////////////////////
 
   addProfileInfo() {
     return fetch(this._url,
