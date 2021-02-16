@@ -4,6 +4,7 @@ import FormValidator from "../components/FormValidator.js";
 import { initialCards } from "../components/initialCards.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithConfirmDelete from "../components/PopupWithConfirmDelete.js"
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/api.js"
@@ -116,45 +117,52 @@ userInfo1.addProfileInfo()
     })
 //начальное заполнение формы редактирования профиля
 function createCard(item) {
-    const card = new Card(item, handleCardClick, ".template", api, userId, like, disLike, openPopupDeleteCard, submitFormDeleteCard );
+    const card = new Card(item, handleCardClick, ".template", api, userId, like, disLike, popupDeleteCard, submitFormDeleteCard );
     const cardElement = card.generateCard();
     return cardElement;
 }
 
 //Функция сабмита редактирования профиля
 function submitFormEditProfile(formObject) {
+    renderLoading(true, loadingBtnSubmitProfile);
     userInfo1.editProfileInfo(formObject)
         .then(res => {
             userInfo.setUserInfo({
                 newUser: res.name,
                 newJob: res.about
             })
-        });
-    renderLoading()
-    openPopupEditProfile.close();
+        })
+        .finally(() => {renderLoading(false, loadingBtnSubmitProfile);});
+    
+    setTimeout(()=>openPopupEditProfile.close(), 1500);
+    
 }
 //функция сабмита добавления новой карточки
 function submitFormAdd(item) {
+    renderLoading(true, loadingBtnSubmitNewCard);
     api
         .addCard(item)
         .then(res => {
             cardsList.addItem(createCard(res))
             
         })
-
-    popupWithFormNewCard.close();
+        .finally(() => {renderLoading(false, loadingBtnSubmitNewCard);});
+        setTimeout(()=>popupWithFormNewCard.close(), 1500);
+    
 }
 
 function submitFormEditAvatar(data) {
-
+    renderLoading(true, loadingBtnSubmitAvatar);
     editAvatar.editAvatarIcon(data)
         .then(res => {
             avatarIcon.src = res.avatar
 
-        });
+        }).finally(() => {renderLoading(false, loadingBtnSubmitAvatar);})
+
 
     //avatarIcon.src = formInputAvatar.value;
-    openPopupEditAvatar.close();
+    setTimeout(()=>openPopupEditAvatar.close(), 1500);
+    
 }
 //функции открытия для попапа...
 const profileEditBtn = document.querySelector(".profile__edit-button");
@@ -178,18 +186,19 @@ editAvatarBtn.addEventListener('click', () => {
     openPopupEditAvatar.open();
 }
 )
+
+const popupDeleteCard = new PopupWithConfirmDelete('.popup_delete-confirm', submitFormDeleteCard, api) 
 //...удаления карточки
 function submitFormDeleteCard ()
-{   
+{
     popupDeleteCard.close()
+}  
     
-}
+    
 
-const popupDeleteCard = new PopupWithForm('.popup_delete-confirm', submitFormDeleteCard )
-function openPopupDeleteCard (){
-    
-    popupDeleteCard.open()
-}
+
+
+console.log(popupDeleteCard)
 //... добавления новой карточки
 const popupWithFormNewCard = new PopupWithForm(".popup_add-element", submitFormAdd);
 addNewCardBtn.addEventListener("click", () => {
@@ -205,12 +214,19 @@ function handleCardClick(e) {
    
 }
 
-
-
-function renderLoading(isLoading) {
-    if (!isLoading) {
+function deleteCard (data){
+    api.removeCard(data)
     }
-    else {
+    
+    
+const loadingBtnSubmitProfile = document.querySelector('.popup__submit-btn_edit-profile');
+const loadingBtnSubmitNewCard = document.querySelector('.popup__submit-btn_add-element')
+const loadingBtnSubmitAvatar = document.querySelector('.popup__submit-btn_avatar')
+function renderLoading(isLoading, btn) { 
+    if (isLoading) { 
+        btn.textContent = 'Сохранение'
+    }
+    else {btn.textContent = 'Сохранить'
 
 
     }

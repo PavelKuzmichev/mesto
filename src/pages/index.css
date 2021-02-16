@@ -51,6 +51,10 @@
 @import url(../blocks/popup/__input/_form/popup__input_form_title.css);
 @import url(../blocks/popup/__input/_form/popup__input_form_link.css);
 @import url(../blocks/template/template.css);
+.popup__submit-btn_loading {
+   
+}
+
 .element__remove_clear{
     display: none;
 }
@@ -75,17 +79,21 @@
                 top: 0}}
                 @media screen and (max-width: 900px){
                     .profile__avatar-edit {
-                        top: 20px}}
+                        top: 18px}}
                         @media screen and (max-width: 831px){
                             .profile__avatar-edit {
                                 top: 0}}
                                 @media screen and (max-width: 399px){
                                     .profile__avatar-edit {
-                                        left: 115px;}}
-                                        @media screen and (max-width: 340px){
+                                        left: 106px;}}
+                                        @media screen and (max-width: 350px){
                                             .profile__avatar-edit {
-                                                left: 89px;
-                                    } @media screen and (max-width: 320px){
+                                                left: 95px;
+                                    }@media screen and (max-width: 340px){
+                                        .profile__avatar-edit {
+                                            left: 89px;
+                                        }}
+                                     @media screen and (max-width: 320px){
                                         .profile__avatar-edit {
                                             left: 81px;
                                         }}}

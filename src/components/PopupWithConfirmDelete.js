@@ -1,11 +1,13 @@
 import { Popup } from "./Popup.js";
-export default class PopupWithForm extends Popup {
-    constructor(popupSelector, submitForm) {
+import Card from "../components/Card.js";
+export default class PopupWithConfirmDelete extends Popup {
+    constructor(popupSelector, submitForm, api) {
         super(popupSelector);
         this._popupForm = this._popup.querySelector(".popup__form");
         this._submitForm = submitForm;
         this._inputList = this._popup.querySelectorAll(".popup__input");
-       
+        this._api = api
+       // console.log(Card.removeItem())
     }
 
     _getInputValues() {
@@ -22,19 +24,16 @@ export default class PopupWithForm extends Popup {
  
         this._popup.addEventListener("submit", (evt) => {
             evt.preventDefault();
-           
-             this._submitForm(this._getInputValues())
             
+             this._submitForm(this._getInputValues())
+             //() => {Card.removeItem}
+            //console.log(Card.focusCard)
             
             
 
         })
     }
     close() {
-        
         super.close();
         this._popupForm.reset();
-    }
-   
-}
-
+    }}
