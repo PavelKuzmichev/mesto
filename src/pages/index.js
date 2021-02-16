@@ -60,7 +60,7 @@ api
     .then((res) => {
 
         cardsList.renderItems(res)
-        console.log(res)
+        
     })
 
 //константы
@@ -116,7 +116,7 @@ userInfo1.addProfileInfo()
     })
 //начальное заполнение формы редактирования профиля
 function createCard(item) {
-    const card = new Card(item, handleCardClick, ".template", api, userId, like, disLike);
+    const card = new Card(item, handleCardClick, ".template", api, userId, like, disLike, openPopupDeleteCard, submitFormDeleteCard );
     const cardElement = card.generateCard();
     return cardElement;
 }
@@ -139,7 +139,7 @@ function submitFormAdd(item) {
         .addCard(item)
         .then(res => {
             cardsList.addItem(createCard(res))
-            console.log(res.likes)
+            
         })
 
     popupWithFormNewCard.close();
@@ -179,12 +179,17 @@ editAvatarBtn.addEventListener('click', () => {
 }
 )
 //...удаления карточки
-/*function submitFormDeleteCard ()
-{
-
+function submitFormDeleteCard ()
+{   
+    popupDeleteCard.close()
+    
 }
-const popupDeleteCard = new PopupWithForm('.popup popup_delete-confirm', submitFormDeleteCard)*/
 
+const popupDeleteCard = new PopupWithForm('.popup_delete-confirm', submitFormDeleteCard )
+function openPopupDeleteCard (){
+    
+    popupDeleteCard.open()
+}
 //... добавления новой карточки
 const popupWithFormNewCard = new PopupWithForm(".popup_add-element", submitFormAdd);
 addNewCardBtn.addEventListener("click", () => {
@@ -196,11 +201,8 @@ addNewCardBtn.addEventListener("click", () => {
 const popupWithImage = new PopupWithImage(".popup_zoom");
 function handleCardClick(e) {
     popupWithImage.open(e.target);
-    console.log(
-    like.likeCard(this.cardId1)
-        .then((res)=>{
-            res.likes = this._element.querySelector('.element__likeSum').value
-        }))
+    
+   
 }
 
 
@@ -213,7 +215,7 @@ function renderLoading(isLoading) {
 
     }
 }
-
+popupDeleteCard.setEventListeners();
 openPopupEditAvatar.setEventListeners();
 popupWithImage.setEventListeners();
 openPopupEditProfile.setEventListeners();
