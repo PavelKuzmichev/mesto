@@ -1,55 +1,82 @@
 export default class Api {
-    constructor(config){
-        this._url = config.url;
-        this._headers = config.headers;
-      }
+  constructor(config) {
+    this._url = config.url;
+    this._headers = config.headers;
+  }
 
-addAllCards (){   
-    return fetch (this._url,
-    {headers: this._headers}
-)
-.then (res=>{ 
-    return res.json()})}
-addCard(data){    
-    
+  addAllCards() {
+    return fetch(this._url,
+      { headers: this._headers }
+    )
+      .then(res => {
+        return res.json()
+      })
+  }
+  addCard(data) {
+
     return fetch(this._url, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        
-name: data.name,
-link: data.link,
-id: data.id
 
-})}).then (res=>{ return res.json()})
-}
-/*removeCard(id){
-    return fetch(`${this._url}${id}`, {
+        name: data.name,
+        link: data.link,
+        id: data.id
+
+      })
+    }).then(res => {
+      return res.json()
+    })
+  }
+  removeCard(data) {
+ console.log(data)
+ console.log(data._id)
+ console.log(data.id)
+    return fetch(`${this._url}${data}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then (res=>{ return res.json()})
-    return fetch (this._url,
-        {headers: this._headers}
-  }*/
-addProfileInfo(){   
-    return fetch (this._url,
-    {headers: this._headers}
-)
-.then (res=>{ console.log(res)
-    return res.json()})}
-
-editProfileInfo 
-(data){    
+    }).then(res => { return res.json() })
     
+  }
+
+  addProfileInfo() {
+    return fetch(this._url,
+      { headers: this._headers }
+    )
+      .then(res => {
+        return res.json()
+      })
+  }
+
+  editProfileInfo
+    (data) {
+
     return fetch(this._url, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         about: data.about
-      
 
-})}).then (res=>{ return res.json()})
+
+      })
+    }).then(res => { return res.json() })
+  }
+  editAvatarIcon
+    (data) {
+
+    return fetch(this._url, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+
+        avatar: data.link
+
+
+
+      })
+    }).then(res => { return res.json() })
+  }
 }
 /*addNewCard(data){
     return fetch (
@@ -63,5 +90,4 @@ editProfileInfo
         .then(res => { return res.json})
 }*/
 
-} 
- 
+

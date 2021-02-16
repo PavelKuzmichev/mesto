@@ -14,6 +14,9 @@ const validationConfig = {
     errorClass: "popup__input_invalid",
     errorSelector: ".popup__error",
 };
+let userId = null
+
+//'ca67b3c561070f21b7e4e0f1'
 const cardsList = new Section(
     {
         
@@ -35,26 +38,28 @@ const api = new Api (
 api
    .addAllCards()
    .then((res)=> {
+    
+       cardsList.renderItems(res)
        console.log(res)
-       cardsList.renderItems(res)})
+    })
+    
 //константы
 
 const nameInput = document.querySelector(".profile__name");
 const jobInput = document.querySelector(".profile__about");
 const formInputName = document.querySelector(".popup__input_form_name");
 const formInputAbout = document.querySelector(".popup__input_form_about");
+const formInputAvatar = document.querySelector(".popup__input_form_avatar")
 
 //валидация
 const formValidatorCard = new FormValidator(validationConfig, ".popup__form_area_newcard");
 const formValidatorAuthor = new FormValidator(validationConfig, ".popup__form_area_editprofile");
+const formValidatorAvatar = new FormValidator(validationConfig,".popup__form_area_avatar" )
 formValidatorCard.enableValidation();
 formValidatorAuthor.enableValidation();
+formValidatorAvatar.enableValidation();
 //рендер стоковых карточек
-function createCard(item) {
-    const card = new Card(item, handleCardClick, ".template", api);
-    const cardElement = card.generateCard();
-    return cardElement;
-}
+
 
 const userInfo1 = new  Api ( 
     {url: 'https://mesto.nomoreparties.co/v1/cohort-20/users/me',
@@ -63,17 +68,33 @@ const userInfo1 = new  Api (
          'Content-Type': 'application/json'}
          }
 )
+
+const editAvatar = new Api ({url: 'https://mesto.nomoreparties.co/v1/cohort-20/users/me/avatar',
+headers: {
+    authorization: '4b4ac9ed-5313-4881-afac-1a610d770d12',
+    'Content-Type': 'application/json'}
+    }
+     
+)
+const avatarIcon = document.querySelector('.profile__avatar');
 const userInfo = new UserInfo({
     name: nameInput,
     job: jobInput,
-});
-const avatarIcon = document.querySelector('.profile__avatar');
+    
+})
+
 userInfo1.addProfileInfo()
 .then(res=> {nameInput.textContent = res.name,
     jobInput.textContent = res.about
-avatarIcon.src = res.avatar})
+avatarIcon.src = res.avatar
+return userId = res._id
+})
 //начальное заполнение формы редактирования профиля
-
+function createCard(item) {
+    const card = new Card(item, handleCardClick, ".template", api, userId);
+    const cardElement = card.generateCard();
+    return cardElement;
+}
 
 //Функция сабмита редактирования профиля
 function submitFormEditProfile(formObject) {
@@ -83,17 +104,32 @@ function submitFormEditProfile(formObject) {
         newUser: res.name,
         newJob: res.about
     })});
+    renderLoading()
     openPopupEditProfile.close();
 }
 //функция сабмита добавления новой карточки
 function submitFormAdd(item) {
     api
     .addCard(item)
-    .then(res =>{cardsList.addItem(createCard(res))})
+    .then(res =>{
+        cardsList.addItem(createCard(res))
+        console.log(res._id)
+    })
     
     popupWithFormNewCard.close();
 }
 
+function submitFormEditAvatar(data){
+  
+    editAvatar.editAvatarIcon(data)
+    .then(res =>{
+        avatarIcon.src = res.avatar
+      
+    });
+    
+    //avatarIcon.src = formInputAvatar.value;
+    openPopupEditAvatar.close();
+}
 //функции открытия для попапа...
 const profileEditBtn = document.querySelector(".profile__edit-button");
 const addNewCardBtn = document.querySelector(".profile__add-button");
@@ -107,6 +143,16 @@ profileEditBtn.addEventListener("click", () => {
     formValidatorAuthor.setButtonState();
     openPopupEditProfile.open();
 });
+//...редактирования аватара
+const editAvatarBtn = document.querySelector('.profile__avatar-edit')
+const openPopupEditAvatar = new PopupWithForm('.popup__avatar', submitFormEditAvatar);
+editAvatarBtn.addEventListener('click', ()=>{
+    formValidatorAvatar.clearSpanError();
+    formValidatorAvatar.setButtonState();
+    openPopupEditAvatar.open();
+}
+)
+
 //... добавления новой карточки
 const popupWithFormNewCard = new PopupWithForm(".popup_add-element", submitFormAdd);
 addNewCardBtn.addEventListener("click", () => {
@@ -120,6 +166,17 @@ function handleCardClick(e) {
     popupWithImage.open(e.target);
 }
 
+
+function renderLoading(isLoading) {
+    if (!isLoading) {
+        }
+    else {
+       
+      
+    }
+  }
+  
+openPopupEditAvatar.setEventListeners();
 popupWithImage.setEventListeners();
 openPopupEditProfile.setEventListeners();
 popupWithFormNewCard.setEventListeners();

@@ -4,6 +4,7 @@ export class Popup {
         this._handleEscClose = this._handleEscClose.bind(this);
         this._closeByClick = this._closeByClick.bind(this);
         this._popupCloseBtn = this._popup.querySelector(".popup__close-btn");
+        
     }
     open() {
         this._popup.classList.add("popup_visible");
@@ -30,5 +31,6 @@ export class Popup {
         
         this._popupCloseBtn.addEventListener("click", () => this.close());
     }
+   
 }
 
