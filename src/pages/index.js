@@ -149,7 +149,7 @@ function submitFormEditAvatar(data) {
 //функции открытия для попапа...
 const profileEditBtn = document.querySelector(".profile__edit-button");
 const addNewCardBtn = document.querySelector(".profile__add-button");
-const editAvatarBtn = document.querySelector(".profile__avatar-edit");
+const editAvatarBtn = document.querySelector(".profile__edit-avatar");
 //... редактировния профиля
 const openPopupEditProfile = new PopupWithForm(".popup_edit-profile", submitFormEditProfile);
 profileEditBtn.addEventListener("click", () => {
