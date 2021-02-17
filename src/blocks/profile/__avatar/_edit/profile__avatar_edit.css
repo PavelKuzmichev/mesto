@@ -1,4 +1,4 @@
-.profile__avatar-edit {
+.profile__avatar_edit {
     
     opacity: 0;
     position: absolute;
@@ -12,48 +12,48 @@
     z-index: 1;
 }
 @media screen and (max-width: 1008px) {
-    .profile__avatar-edit {
+    .profile__avatar_edit {
         top: 20px;
     }
 }
 @media screen and (max-width: 930px) {
-    .profile__avatar-edit {
+    .profile__avatar_edit {
         top: 0;
     }
 }
 @media screen and (max-width: 900px) {
-    .profile__avatar-edit {
+    .profile__avatar_edit {
         top: 18px;
     }
 }
 @media screen and (max-width: 831px) {
-    .profile__avatar-edit {
+    .profile__avatar_edit {
         top: 0;
     }
 }
 @media screen and (max-width: 399px) {
-    .profile__avatar-edit {
+    .profile__avatar_edit {
         left: 106px;
     }
 }
 @media screen and (max-width: 350px) {
-    .profile__avatar-edit {
+    .profile__avatar_edit {
         left: 95px;
     }
     @media screen and (max-width: 340px) {
-        .profile__avatar-edit {
+        .profile__avatar_edit {
             left: 89px;
         }
     }
     @media screen and (max-width: 320px) {
-        .profile__avatar-edit {
+        .profile__avatar_edit {
             left: 81px;
         }
     }
 }
 
 
- .profile__avatar-edit:hover {
+ .profile__avatar_edit:hover {
     cursor: pointer;
     background-image: url(../../../images/avatarEdit.png);
     background-color: black;

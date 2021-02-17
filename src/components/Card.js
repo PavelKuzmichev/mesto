@@ -12,7 +12,7 @@ export default class Card {
         this._like = like;
         this._popupDeleteCard = popupDeleteCard;
         this._handleDeleteCardClick = handleDeleteCardClick;
-        //this._submitFormDeleteCard = submitFormDeleteCard;
+        
     }
 
     _getTemplate() {
