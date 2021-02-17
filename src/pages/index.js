@@ -77,7 +77,7 @@ const userInfo = new UserInfo({
     job: jobInput,
 });
 //функция редактирования аватара
-const avatarIcon = document.querySelector(".profile__avatar");
+const avatarIcon = document.querySelector(".profile__avatarIcon");
 userInfoApi.addProfileInfo().then((res) => {
     (nameInput.textContent = res.name), (jobInput.textContent = res.about);
     avatarIcon.src = res.avatar;
