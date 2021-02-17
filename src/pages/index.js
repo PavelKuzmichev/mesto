@@ -161,7 +161,7 @@ profileEditBtn.addEventListener("click", () => {
     openPopupEditProfile.open();
 });
 //...редактирования аватара
-const openPopupEditAvatar = new PopupWithForm(".popup__avatar", submitFormEditAvatar);
+const openPopupEditAvatar = new PopupWithForm(".popup_avatar", submitFormEditAvatar);
 editAvatarBtn.addEventListener("click", () => {
     formValidatorAvatar.clearSpanError();
     formValidatorAvatar.setButtonState();
