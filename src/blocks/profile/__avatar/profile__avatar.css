@@ -3,6 +3,7 @@
     width: 120px;
     border-radius: 90px;
  }
+
 @media screen and (max-width: 538px){
     .profile__avatar {
         display: flex;

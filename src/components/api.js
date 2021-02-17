@@ -1,4 +1,10 @@
-export default class Api {
+const onError = (res)=>{
+  if(res.ok){
+    return res.json();
+  }
+  return Promise.reject('Сервер не доступен')
+}
+export class Api {
   constructor(config) {
     this._url = config.url;
     this._headers = config.headers;
@@ -7,10 +13,10 @@ export default class Api {
   addAllCards() {
     return fetch(this._url,
       { headers: this._headers }
-    )
-      .then(res => {
-        return res.json()})
-      .catch(err=>{console.log(err)})
+    ).then(onError)
+      
+        
+      
   }
   addCard(data) {
     return fetch(this._url, {
@@ -22,9 +28,7 @@ export default class Api {
         id: data.id
       })
     })
-    .then(res => {
-      return res.json()})
-    .catch(err=>{console.log(err)})
+    .then(onError)
 
   }
   removeCard(data) {
@@ -33,8 +37,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     })
-    .then(res => { return res.json() })
-    .catch(err=>{console.log(err)})
+    .then(onError)
 
 
   }
@@ -45,25 +48,20 @@ export default class Api {
       method: "PUT",
       headers: this._headers,
     })
-    .then(res => { return res.json() })
-    .catch(err=>{console.log(err)})
+    .then(onError)
  }
  disLikeCard(data) {
    return fetch(`${this._url}${data}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(res => { return res.json() })
-    .catch(err=>{console.log(err)})
+    }).then(onError)
 
   }
   addProfileInfo() {
     return fetch(this._url,
       { headers: this._headers }
     )
-      .then(res => {
-        return res.json()
-      })
-      .catch(err=>{console.log(err)})
+    .then(onError)
   }
 
   editProfileInfo
@@ -76,8 +74,7 @@ export default class Api {
         about: data.about
       })
     })
-    .then(res => { return res.json() })
-    .catch(err=>{console.log(err)})
+    .then(onError)
   }
   editAvatarIcon
     (data) {
@@ -87,8 +84,7 @@ export default class Api {
       body: JSON.stringify({
         avatar: data.link})
     })
-    .then(res => { return res.json() })
-    .catch(err=>{console.log(err)})
+    .then(onError)
   }
 }
 

@@ -1,13 +1,12 @@
 import "./index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import { initialCards } from "../components/initialCards.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithConfirmDelete from "../components/PopupWithConfirmDelete.js"
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-import Api from "../components/api.js"
+import {Api} from "../components/api.js"
 const validationConfig = {
     inputSelector: ".popup__input",
     submitButtonSelector: ".popup__submit-btn",
@@ -16,6 +15,7 @@ const validationConfig = {
     errorSelector: ".popup__error",
 };
 let userId = null
+let templateCard = null
 const like = new Api(
     {
         url: 'https://mesto.nomoreparties.co/v1/cohort-20/cards/likes/',
@@ -35,7 +35,7 @@ const disLike = new Api(
     }
 )
 
-//'ca67b3c561070f21b7e4e0f1'
+
 const cardsList = new Section(
     {
 
@@ -59,10 +59,11 @@ const api = new Api(
 api
     .addAllCards()
     .then((res) => {
-console.log(res)
+
         cardsList.renderItems(res)
 
     })
+    
 
 //константы
 
@@ -116,9 +117,18 @@ userInfo1.addProfileInfo()
         return userId = res._id
     })
 //начальное заполнение формы редактирования профиля
-function createCard(item) {
-    const card = new Card(item, handleCardClick, ".template", api, userId, like, disLike, popupDeleteCard, submitFormDeleteCard);
+
+
+const createCard = (item) => {
+    const card = new Card(item, handleCardClick, ".template", api, userId, like, disLike, popupDeleteCard,{
+                handleDeleteCardClick: () => {
+                    templateCard = card;
+                    popupDeleteCard.open(item);
+                    console.log(item)
+        } });
+    
     const cardElement = card.generateCard();
+    
     return cardElement;
 }
 
@@ -187,17 +197,35 @@ editAvatarBtn.addEventListener('click', () => {
 }
 )
 
-const popupDeleteCard = new PopupWithConfirmDelete('.popup_delete-confirm', submitFormDeleteCard, api)
+const popupDeleteCard = new PopupWithConfirmDelete('.popup_delete-confirm', (data) => {
+    console.log(data)
+      api.removeCard(data._id)
+        .then((data) => {
+            console.log(data)
+            console.log(templateCard._id)
+          templateCard.removeItem();
+        })
+        .then(() => {
+          tempCard = null;
+          popupDeleteCard.close();
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  )
 //...удаления карточки
-function submitFormDeleteCard() {
+/*function submitFormDeleteCard(item) {
+    //templateCard.removeItem
+    console.log(item)
     popupDeleteCard.close()
-}
+}*/
 
 
 
 
 
-console.log(popupDeleteCard)
+
 //... добавления новой карточки
 const popupWithFormNewCard = new PopupWithForm(".popup_add-element", submitFormAdd);
 addNewCardBtn.addEventListener("click", () => {
@@ -209,13 +237,11 @@ addNewCardBtn.addEventListener("click", () => {
 const popupWithImage = new PopupWithImage(".popup_zoom");
 function handleCardClick(e) {
     popupWithImage.open(e.target);
-
+    
 
 }
 
-function deleteCard(data) {
-    api.removeCard(data)
-}
+
 
 
 const loadingBtnSubmitProfile = document.querySelector('.popup__submit-btn_edit-profile');

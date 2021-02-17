@@ -1,4 +1,6 @@
-.header__logo {}
+.header__logo:{
+    
+}
 .header__logo:hover {
     opacity: 0.1;
 }

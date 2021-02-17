@@ -1,22 +1,17 @@
 import { Popup } from "./Popup.js";
+import {ff} from "../../src/pages/index.js";
 import Card from "../components/Card.js";
 export default class PopupWithConfirmDelete extends Popup {
-    constructor(popupSelector, submitForm, api) {
+    constructor(popupSelector, submitForm) {
         super(popupSelector);
         this._popupForm = this._popup.querySelector(".popup__form");
         this._submitForm = submitForm;
         this._inputList = this._popup.querySelectorAll(".popup__input");
-        this._api = api
-       // console.log(Card.removeItem())
-    }
-
-    _getInputValues() {
+       // this._api = api
         
-        this._formValues = {};
-        this._inputList.forEach((input) => (this._formValues[input.name] = input.value));
-
-        return this._formValues;
     }
+
+    
 
     setEventListeners() {
         super.setEventListeners();
@@ -25,14 +20,19 @@ export default class PopupWithConfirmDelete extends Popup {
         this._popup.addEventListener("submit", (evt) => {
             evt.preventDefault();
             
-             this._submitForm(this._getInputValues())
-             //() => {Card.removeItem}
-            //console.log(Card.focusCard)
+            console.log(this._data)
+             this._submitForm(this._data)
+this.close()
+           
             
             
 
         })
     }
+    open(data) {
+        this._data = data;
+        super.open();
+      }
     close() {
         super.close();
         this._popupForm.reset();
