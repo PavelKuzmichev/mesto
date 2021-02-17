@@ -9,54 +9,53 @@ export default class Api {
       { headers: this._headers }
     )
       .then(res => {
-        return res.json()
-      })
+        return res.json()})
+      .catch(err=>{console.log(err)})
   }
   addCard(data) {
-
     return fetch(this._url, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-
         name: data.name,
         link: data.link,
         id: data.id
-
       })
-    }).then(res => {
-      return res.json()
     })
+    .then(res => {
+      return res.json()})
+    .catch(err=>{console.log(err)})
+
   }
   removeCard(data) {
- 
+
     return fetch(`${this._url}${data}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(res => { return res.json() })
-    
+    })
+    .then(res => { return res.json() })
+    .catch(err=>{console.log(err)})
+
+
   }
- ////////////////////////////////////////////////////// 
-likeCard (data) {
- console.log(data)
+  
+  likeCard(data) {
+
     return fetch(`${this._url}${data}`, {
       method: "PUT",
       headers: this._headers,
+    })
+    .then(res => { return res.json() })
+    .catch(err=>{console.log(err)})
+ }
+ disLikeCard(data) {
+   return fetch(`${this._url}${data}`, {
+      method: "DELETE",
+      headers: this._headers,
     }).then(res => { return res.json() })
-    
+    .catch(err=>{console.log(err)})
+
   }
-
-
-disLikeCard (data) {
- 
-  return fetch(`${this._url}${data}`, {
-    method: "DELETE",
-    headers: this._headers,
-  }).then(res => { return res.json() })
-  
-}
-///////////////////////////////////////////////////////
-
   addProfileInfo() {
     return fetch(this._url,
       { headers: this._headers }
@@ -64,48 +63,34 @@ disLikeCard (data) {
       .then(res => {
         return res.json()
       })
+      .catch(err=>{console.log(err)})
   }
 
   editProfileInfo
     (data) {
-
     return fetch(this._url, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         about: data.about
-
-
       })
-    }).then(res => { return res.json() })
+    })
+    .then(res => { return res.json() })
+    .catch(err=>{console.log(err)})
   }
   editAvatarIcon
     (data) {
-
     return fetch(this._url, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-
-        avatar: data.link
-
-
-
-      })
-    }).then(res => { return res.json() })
+        avatar: data.link})
+    })
+    .then(res => { return res.json() })
+    .catch(err=>{console.log(err)})
   }
 }
-/*addNewCard(data){
-    return fetch (
-        this._url,
-        {method: "POST",
-        headers: this._headers,
-        body: JSON.stringify({
-            name: data.name,
-            about: data.link
-          }) })
-        .then(res => { return res.json})
-}*/
+
 
 

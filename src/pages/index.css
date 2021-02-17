@@ -6,6 +6,7 @@
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__avatar-edit/profile__avatar-edit.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__form/profile__form.css);
 @import url(../blocks/profile/__about/profile__about.css);
@@ -18,12 +19,15 @@
 @import url(../blocks/element/__like/element__like.css);
 @import url(../blocks/element/__like/_active/element__like_active.css);
 @import url(../blocks/element/__remove/element__remove.css);
+@import url(../blocks/element/__remove/_clear/element__remove_clear.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_visible/popup_visible.css);
 @import url(../blocks/popup/__window/popup__window.css);
 @import url(../blocks/popup/__window-zoom/popup__window-zoom.css);
+@import url(../blocks/popup/__window-avatar/popup__window-avatar.css);
+@import url(../blocks/popup/__window_delete-confirm/popup__window_delete-confirm.css);
 @import url(../blocks/popup/_edit-profile/popup_edit-profile.css);
 @import url(../blocks/popup/_zoom/popup_zoom.css);
 @import url(../blocks/popup/_add-element/popup_add-element.css);
@@ -32,9 +36,11 @@
 @import url(../blocks/popup/__error/_area/popup__error_area_about.css);
 @import url(../blocks/popup/__error/_area/popup__error_area_title.css);
 @import url(../blocks/popup/__error/_area/popup__error_area_link.css);
+@import url(../blocks/popup/__error/_area/popup__error_area_avatar.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__title-zoom/popup__title-zoom.css);
+@import url(../blocks/popup/__title_delete-confirm/popup__title_delete-confirm.css);
 @import url(../blocks/popup/__image-zoom/popup__image-zoom.css);
 @import url(../blocks/popup/__submit-btn/popup__submit-btn.css);
 @import url(../blocks/popup/__submit-btn/_add-element/popup__submit-btn_add-element.css);
@@ -51,72 +57,16 @@
 @import url(../blocks/popup/__input/_form/popup__input_form_title.css);
 @import url(../blocks/popup/__input/_form/popup__input_form_link.css);
 @import url(../blocks/template/template.css);
-.popup__submit-btn_loading {
-   
-}
-
-.element__remove_clear{
-    display: none;
-}
-
-.profile__avatar-edit {
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 120px;
-    width: 120px;
-    padding: 0;
-    border: none;
-    border-radius: 90px;
-    z-index: 1;
- }
- @media screen and (max-width: 1008px){
-    .profile__avatar-edit {
-        top: 20px}}
-        @media screen and (max-width: 930px){
-            .profile__avatar-edit {
-                top: 0}}
-                @media screen and (max-width: 900px){
-                    .profile__avatar-edit {
-                        top: 18px}}
-                        @media screen and (max-width: 831px){
-                            .profile__avatar-edit {
-                                top: 0}}
-                                @media screen and (max-width: 399px){
-                                    .profile__avatar-edit {
-                                        left: 106px;}}
-                                        @media screen and (max-width: 350px){
-                                            .profile__avatar-edit {
-                                                left: 95px;
-                                    }@media screen and (max-width: 340px){
-                                        .profile__avatar-edit {
-                                            left: 89px;
-                                        }}
-                                     @media screen and (max-width: 320px){
-                                        .profile__avatar-edit {
-                                            left: 81px;
-                                        }}}
-
- .profile__avatar-edit:hover {
-    cursor: pointer;
-    background-image: url(../images/method-draw-image1q.png);
-    background-color: black;
-    background-size: 26px 26px;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: .7;
-    
- }
 
 
- .popup__window-avatar {
-    height: 272px;
-    }
 
-    .popup__error_area_avatar {
-        top: 148px;
-    }
+
+
+
+
+
+
+ 
 
     .element__likeSum {
         position: absolute;

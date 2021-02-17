@@ -13,46 +13,31 @@ export default class Card {
         this._like = like;
         this._disLike = disLike;
         this._popupDeleteCard = popupDeleteCard;
-        this._submitFormDeleteCard = submitFormDeleteCard;
-
-    }
-
-
+        this._submitFormDeleteCard = submitFormDeleteCard;}
 
     _getTemplate() {
         const cardElement = this._cardTemplate.content.querySelector(".element").cloneNode(true);
         return cardElement;
     }
     _checkUserID() {
-        if (this.userID !== this._id) {
-
-            this._element.querySelector(".element__remove").classList.add("element__remove_clear")
+        if (this.userID === this._id) {
+            this._element.querySelector(".element__remove").classList.remove("element__remove_clear")
         }
-
     }
     _setListenersToItem() {
-
         this._element.querySelector(".element__remove").addEventListener("click", () => { this._popupDeleteCard.open() })
         this._element.querySelector(".element__like").addEventListener("click", () => { this.likeOrDislike() });
         this._cardImage.addEventListener("click", this._handleCardClick);
     }
-    _removeItem() {
-
-
+    removeItem() {
         this._api
             .removeCard(this.focusCard)
             .then(() => {
-
                 this._element.remove();
                 this._element = null;
             })
-
     }
-
-
-
     _checkMyLike(res) {
-
         let userLikeEnablet = res.find(item => item._id == 'ca67b3c561070f21b7e4e0f1')
         if (userLikeEnablet) {
             this._element.querySelector('.element__like').classList.add("element__like_active");
@@ -63,58 +48,28 @@ export default class Card {
         }
     }
     likeOrDislike() {
-
-
         if (this._checkMyLike(this._likes)) {
-            console.log('hh')
-            this._disLikeItem()
-
-        } else {
-            console.log('ff')
-            this._likeItem()
-        }
+            this._disLikeItem()}
+        else {
+            this._likeItem()}
     }
     _likeItem() {
-        console.log(this._likes)
-        this._like.likeCard(this.focusCard)
+            this._like.likeCard(this.focusCard)
             .then((res) => {
-
                 this._element.querySelector('.element__likeSum').textContent = res.likes.length;
                 this._element.querySelector('.element__like').classList.add("element__like_active");
-                this._likes = res.likes
-
-
-            }
-
-
-            )
+                this._likes = res.likes})
     }
     _disLikeItem() {
-
-
-
-        this._like.disLikeCard(this.focusCard)
+            this._like.disLikeCard(this.focusCard)
             .then((res) => {
                 this._element.querySelector('.element__likeSum').textContent = res.likes.length;
                 this._element.querySelector('.element__like').classList.remove("element__like_active");
-                this._likes = res.likes
-            }
-
-            )
+                this._likes = res.likes})
     }
-
-
-
     _confirmRemoveItem() {
-
-
-
-        this._popupDeleteCard.open()
+            this._popupDeleteCard.open()
     }
-
-
-
-   
     generateCard() {
         this._element = this._getTemplate();
         this._cardImage = this._element.querySelector(".element__image");
@@ -125,6 +80,7 @@ export default class Card {
         this._element.querySelector(".element__title").textContent = this._title;
         this._setListenersToItem();
         this._checkUserID()
+        console.log(this._likes)
         this._checkMyLike(this._likes)
         return this._element;
     }

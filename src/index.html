@@ -1,95 +1,103 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8" />
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Место</title>
-    </head>
+<head>
+    <meta charset="UTF-8" />
 
-    <body class="body">
-        <div class="page">
-            <header class="header">
-                <a target="_self" href="#"><img src="<%=require('./images/logo.jpg')%>" class="header__logo" alt="логотип сайта" /></a>
-            </header>
-            <section class="profile">
-                <img class="profile__avatar" src="" alt="аватар пользователя" />
-                <div class="profile__avatar-edit"></div> 
-                <div class="profile__form">
-                    <h1 name="profileName" class="profile__name"></h1>
-                    <p name="profileAbout" class="profile__about"></p>
-                </div>
-                <button type="button" class="profile__edit-button"></button>
-                <button type="button" class="profile__add-button"></button>
-            </section>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Место</title>
+</head>
 
-            <section class="elements"></section>
+<body class="body">
+    <div class="page">
+        <header class="header">
+            <a target="_self" href="#"><img src="<%=require('./images/logo.jpg')%>" class="header__logo"
+                    alt="логотип сайта" /></a>
+        </header>
+        <section class="profile">
+            <img class="profile__avatar" src="" alt="аватар пользователя" />
+            <div class="profile__avatar-edit"></div>
+            <div class="profile__form">
+                <h1 name="profileName" class="profile__name"></h1>
+                <p name="profileAbout" class="profile__about"></p>
+            </div>
+            <button type="button" class="profile__edit-button"></button>
+            <button type="button" class="profile__add-button"></button>
+        </section>
 
-            <footer class="footer">
-                <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
-            </footer>
+        <section class="elements"></section>
+
+        <footer class="footer">
+            <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
+        </footer>
+    </div>
+    <div class="popup popup_edit-profile">
+        <div class="popup__window">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <button type="button" class="popup__close-btn popup__close-btn_edit-profile"></button>
+            <form name="subscribe-form-profile" class="popup__form popup__form_area_editprofile" novalidate>
+                <input autocomplete="off" required minlength="2" maxlength="40" type="text" value="" id="name-card"
+                    placeholder="Имя" name="name" class="popup__input popup__input_form_name" />
+                <span id="name-card-error" class="popup__error popup__error_area_name"></span>
+                <input autocomplete="off" required minlength="2" maxlength="40" type="text" value="" id="about-card"
+                    placeholder="О себе" name="about" class="popup__input popup__input_form_about" />
+                <span id="about-card-error" class="popup__error popup__error_area_about"></span>
+                <button type="submit" class="popup__submit-btn popup__submit-btn_edit-profile">Сохранить</button>
+            </form>
         </div>
-        <div class="popup popup_edit-profile">
-            <div class="popup__window">
-                <h2 class="popup__title">Редактировать профиль</h2>
-                <button type="button" class="popup__close-btn popup__close-btn_edit-profile"></button>
-                <form name="subscribe-form-profile" class="popup__form popup__form_area_editprofile" novalidate>
-                    <input autocomplete="off" required minlength="2" maxlength="40" type="text" value="" id="name-card" placeholder="Имя" name="name" class="popup__input popup__input_form_name" />
-                    <span id="name-card-error" class="popup__error popup__error_area_name"></span>
-                    <input autocomplete="off" required minlength="2" maxlength="40" type="text" value="" id="about-card" placeholder="О себе" name="about" class="popup__input popup__input_form_about" />
-                    <span id="about-card-error" class="popup__error popup__error_area_about"></span>
-                    <button type="submit" class="popup__submit-btn popup__submit-btn_edit-profile">Сохранить</button>
-                </form>
-            </div>
+    </div>
+    <div class="popup popup_add-element">
+        <div class="popup__window">
+            <h2 class="popup__title">Новое место</h2>
+            <button type="button" class="popup__close-btn popup__close-btn_add-new-element"></button>
+            <form name="subscribe-form-card" class="popup__form popup__form_area_newcard" novalidate>
+                <input autocomplete="off" required minlength="2" maxlength="40" type="text" id="title-card" value=""
+                    placeholder="Название" name="name" class="popup__input popup__input_form_title" />
+                <span id="title-card-error" class="popup__error popup__error_area_title"></span>
+                <input autocomplete="off" required type="url" id="link-card" value="" placeholder="Ссылка на картинку"
+                    name="link" class="popup__input popup__input_form_link" />
+                <span id="link-card-error" class="popup__error popup__error_area_link"></span>
+                <button type="submit" class="popup__submit-btn popup__submit-btn_add-element">Сохранить</button>
+            </form>
         </div>
-        <div class="popup popup_add-element">
-            <div class="popup__window">
-                <h2 class="popup__title">Новое место</h2>
-                <button type="button" class="popup__close-btn popup__close-btn_add-new-element"></button>
-                <form name="subscribe-form-card" class="popup__form popup__form_area_newcard" novalidate>
-                    <input autocomplete="off" required minlength="2" maxlength="40" type="text" id="title-card" value="" placeholder="Название" name="name" class="popup__input popup__input_form_title" />
-                    <span id="title-card-error" class="popup__error popup__error_area_title"></span>
-                    <input autocomplete="off" required type="url" id="link-card" value="" placeholder="Ссылка на картинку" name="link" class="popup__input popup__input_form_link" />
-                    <span id="link-card-error" class="popup__error popup__error_area_link"></span>
-                    <button type="submit" class="popup__submit-btn popup__submit-btn_add-element">Сохранить</button>
-                </form>
-            </div>
+    </div>
+    <div class="popup popup_zoom">
+        <div class="popup__window popup__window-zoom">
+            <img class="popup__image-zoom" src="#" alt="пустышка" />
+            <h2 class="popup__title-zoom"></h2>
+            <button type="button" class="popup__close-btn popup__close-btn_zoom-image"></button>
         </div>
-        <div class="popup popup_zoom">
-            <div class="popup__window popup__window-zoom">
-                <img class="popup__image-zoom" src="#" alt="пустышка" />
-                <h2 class="popup__title-zoom"></h2>
-                <button type="button" class="popup__close-btn popup__close-btn_zoom-image"></button>
-            </div>
+    </div>
+    <div class="popup popup__avatar">
+        <div class="popup__window popup__window-avatar">
+            <button type="button" class="popup__close-btn popup__close-btn_avatar"></button>
+            <h3 class="popup__title">Обновить аватар</h3>
+            <form class="popup__form popup__form_area_avatar" name="avatar">
+                <input autocomplete="off" required type="url" id="Link-Avatar" value="" placeholder="Ссылка на аватар"
+                    name="link" class="popup__input popup__input_form_avatar" />
+                <span id="Link-Avatar-error" class="popup__error popup__error_area_avatar"></span>
+                <button type="submit" class="popup__submit-btn popup__submit-btn_avatar">Сохранить</button>
+            </form>
         </div>
-        <div class="popup popup__avatar">
-            <div class="popup__window popup__window-avatar">
-                <button type="button" class="popup__close-btn popup__close-btn_avatar"></button>
-              <h3 class="popup__title">Обновить аватар</h3>
-              <form class="popup__form popup__form_area_avatar" name="avatar">
-                                <input autocomplete="off" required type="url" id="Link-Avatar" value="" placeholder="Ссылка на аватар" name="link" class="popup__input popup__input_form_avatar" />
-                <span id="Link-Avatar-error" class="popup__error popup__error_area_avatar"></span> 
-                <button type="submit" class="popup__submit-btn popup__submit-btn_avatar">Сохранить</button> 
-              </form>
-            </div>
-          </div>
-          <div class="popup popup_delete-confirm"> 
-            <div class="popup__window popup__window_delete-confirm"> 
-                <h2 class="popup__title popup__title_delete-confirm">Вы уверены?</h2> 
-                <button type="button" class="popup__close-btn popup__close-btn_delete-confirm"></button> 
-                <form class="popup__form popup__form_area_confirm" >
-                <button type="submit" class="popup__submit-btn popup__submit-btn_delete-confirm">Да</button> 
-  </form>
-                
-                            </div>
+    </div>
+    <div class="popup popup_delete-confirm">
+        <div class="popup__window popup__window_delete-confirm">
+            <h2 class="popup__title popup__title_delete-confirm">Вы уверены?</h2>
+            <button type="button" class="popup__close-btn popup__close-btn_delete-confirm"></button>
+            <form class="popup__form popup__form_area_confirm">
+                <button type="submit" class="popup__submit-btn popup__submit-btn_delete-confirm">Да</button>
+            </form>
+
+        </div>
         <template class="template">
             <div class="element">
                 <img class="element__image" src="#" alt="пустышка" />
                 <h3 class="element__title"></h3>
                 <h4 class="element__likeSum">0</h4>
                 <button type="button" class="element__like"></button>
-                <button type="button" class="element__remove"></button>
+                <button type="button" class=" element__remove element__remove_clear"></button>
             </div>
         </template>
-    </body>
+</body>
+
 </html>

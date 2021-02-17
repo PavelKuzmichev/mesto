@@ -16,7 +16,7 @@ const validationConfig = {
     errorSelector: ".popup__error",
 };
 let userId = null
-const like = new Api (
+const like = new Api(
     {
         url: 'https://mesto.nomoreparties.co/v1/cohort-20/cards/likes/',
         headers: {
@@ -25,7 +25,7 @@ const like = new Api (
         }
     }
 )
-const disLike = new Api (
+const disLike = new Api(
     {
         url: 'https://mesto.nomoreparties.co/v1/cohort-20/cards/likes/',
         headers: {
@@ -59,9 +59,9 @@ const api = new Api(
 api
     .addAllCards()
     .then((res) => {
-
+console.log(res)
         cardsList.renderItems(res)
-        
+
     })
 
 //константы
@@ -111,13 +111,13 @@ const userInfo = new UserInfo({
 userInfo1.addProfileInfo()
     .then(res => {
         nameInput.textContent = res.name,
-        jobInput.textContent = res.about
+            jobInput.textContent = res.about
         avatarIcon.src = res.avatar
         return userId = res._id
     })
 //начальное заполнение формы редактирования профиля
 function createCard(item) {
-    const card = new Card(item, handleCardClick, ".template", api, userId, like, disLike, popupDeleteCard, submitFormDeleteCard );
+    const card = new Card(item, handleCardClick, ".template", api, userId, like, disLike, popupDeleteCard, submitFormDeleteCard);
     const cardElement = card.generateCard();
     return cardElement;
 }
@@ -132,10 +132,10 @@ function submitFormEditProfile(formObject) {
                 newJob: res.about
             })
         })
-        .finally(() => {renderLoading(false, loadingBtnSubmitProfile);});
-    
-    setTimeout(()=>openPopupEditProfile.close(), 1500);
-    
+        .finally(() => { renderLoading(false, loadingBtnSubmitProfile); });
+
+    setTimeout(() => openPopupEditProfile.close(), 1500);
+
 }
 //функция сабмита добавления новой карточки
 function submitFormAdd(item) {
@@ -144,11 +144,11 @@ function submitFormAdd(item) {
         .addCard(item)
         .then(res => {
             cardsList.addItem(createCard(res))
-            
+
         })
-        .finally(() => {renderLoading(false, loadingBtnSubmitNewCard);});
-        setTimeout(()=>popupWithFormNewCard.close(), 1500);
-    
+        .finally(() => { renderLoading(false, loadingBtnSubmitNewCard); });
+    setTimeout(() => popupWithFormNewCard.close(), 1500);
+
 }
 
 function submitFormEditAvatar(data) {
@@ -157,12 +157,12 @@ function submitFormEditAvatar(data) {
         .then(res => {
             avatarIcon.src = res.avatar
 
-        }).finally(() => {renderLoading(false, loadingBtnSubmitAvatar);})
+        }).finally(() => { renderLoading(false, loadingBtnSubmitAvatar); })
 
 
     //avatarIcon.src = formInputAvatar.value;
-    setTimeout(()=>openPopupEditAvatar.close(), 1500);
-    
+    setTimeout(() => openPopupEditAvatar.close(), 1500);
+
 }
 //функции открытия для попапа...
 const profileEditBtn = document.querySelector(".profile__edit-button");
@@ -187,14 +187,13 @@ editAvatarBtn.addEventListener('click', () => {
 }
 )
 
-const popupDeleteCard = new PopupWithConfirmDelete('.popup_delete-confirm', submitFormDeleteCard, api) 
+const popupDeleteCard = new PopupWithConfirmDelete('.popup_delete-confirm', submitFormDeleteCard, api)
 //...удаления карточки
-function submitFormDeleteCard ()
-{
+function submitFormDeleteCard() {
     popupDeleteCard.close()
-}  
-    
-    
+}
+
+
 
 
 
@@ -210,23 +209,24 @@ addNewCardBtn.addEventListener("click", () => {
 const popupWithImage = new PopupWithImage(".popup_zoom");
 function handleCardClick(e) {
     popupWithImage.open(e.target);
-    
-   
+
+
 }
 
-function deleteCard (data){
+function deleteCard(data) {
     api.removeCard(data)
-    }
-    
-    
+}
+
+
 const loadingBtnSubmitProfile = document.querySelector('.popup__submit-btn_edit-profile');
 const loadingBtnSubmitNewCard = document.querySelector('.popup__submit-btn_add-element')
 const loadingBtnSubmitAvatar = document.querySelector('.popup__submit-btn_avatar')
-function renderLoading(isLoading, btn) { 
-    if (isLoading) { 
+function renderLoading(isLoading, btn) {
+    if (isLoading) {
         btn.textContent = 'Сохранение'
     }
-    else {btn.textContent = 'Сохранить'
+    else {
+        btn.textContent = 'Сохранить'
 
 
     }
