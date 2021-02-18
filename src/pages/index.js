@@ -94,10 +94,7 @@ function submitFormEditProfile(formObject) {
     renderLoading(true, loadingBtnSubmitProfile);
     api.editProfileInfo(formObject)
         .then((res) => {
-            userInfo.setUserInfo({
-                newUser: res.name,
-                newJob: res.about,
-            });
+            userInfo.setUserInfo(res.name,res.about,res.avatar);
         })
         .catch((err) => {
             console.log(err);

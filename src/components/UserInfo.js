@@ -9,7 +9,7 @@ export default class UserInfo {
         const aboutMe = this._userJob.textContent;
         return { userName: userName, aboutMe: aboutMe };
     }
-    setUserInfo = (newUser, newJob,newAvatar) => {
+    setUserInfo = (newUser, newJob, newAvatar) => {
         this._userName.textContent = newUser;
         this._userJob.textContent = newJob;
         this.setUserAvatar(newAvatar);
