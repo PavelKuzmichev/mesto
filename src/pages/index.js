@@ -61,7 +61,8 @@ const userInfo = new UserInfo({
 
 api.addProfileInfo()
     .then((res) => {
-        (nameInput.textContent = res.name), (jobInput.textContent = res.about), (avatarIcon.src = res.avatar);
+        userInfo.setUserInfo(res.name,res.about,res.avatar)
+        
         return (userId = res._id);
     })
     .catch((err) => {
@@ -127,9 +128,9 @@ function submitFormEditAvatar(data) {
     renderLoading(true, loadingBtnSubmitAvatar);
     api.editAvatarIcon(data)
         .then((res) => {
-            userInfo.setUserAvatar({
-                newAvatar: res.avatar,
-            });
+            userInfo.setUserAvatar(
+                 res.avatar
+            );
         })
         .catch((err) => {
             console.log(err);

@@ -9,13 +9,13 @@ export default class UserInfo {
         const aboutMe = this._userJob.textContent;
         return { userName: userName, aboutMe: aboutMe };
     }
-    setUserInfo = ({ newUser, newJob }) => {
+    setUserInfo = (newUser, newJob,newAvatar) => {
         this._userName.textContent = newUser;
         this._userJob.textContent = newJob;
-        this.setUserAvatar();
+        this.setUserAvatar(newAvatar);
     };
 
-    setUserAvatar({ newAvatar }) {
+    setUserAvatar(newAvatar) {
         this._avatar.src = newAvatar;
     }
 }
