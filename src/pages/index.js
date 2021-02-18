@@ -18,27 +18,23 @@ const validationConfig = {
 //переменные
 let userId = null;
 let templateCard = null;
-//классы API.....
-//...обработка лайка/дизлайка
-const like = new Api({
-    url: "https://mesto.nomoreparties.co/v1/cohort-20/cards/likes/",
-    headers: {
-        authorization: "4b4ac9ed-5313-4881-afac-1a610d770d12",
-        "Content-Type": "application/json",
-    },
-});
+
 //API...
 const api = new Api({
-    url: "https://mesto.nomoreparties.co/v1/cohort-20/cards/",
+    url: "https://mesto.nomoreparties.co/v1/cohort-20",
     headers: {
         authorization: "4b4ac9ed-5313-4881-afac-1a610d770d12",
         "Content-Type": "application/json",
     },
 });
 //...добавления всех карточек
-api.addAllCards().then((res) => {
-    cardsList.renderItems(res);
-});
+api.addAllCards()
+    .then((res) => {
+        cardsList.renderItems(res);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
 //константы
 
@@ -55,37 +51,25 @@ formValidatorCard.enableValidation();
 formValidatorAuthor.enableValidation();
 formValidatorAvatar.enableValidation();
 
-//Api отправка данных редактирования пользователя
-const userInfoApi = new Api({
-    url: "https://mesto.nomoreparties.co/v1/cohort-20/users/me",
-    headers: {
-        authorization: "4b4ac9ed-5313-4881-afac-1a610d770d12",
-        "Content-Type": "application/json",
-    },
-});
-//APi отправка данных редактирования автара
-const editAvatar = new Api({
-    url: "https://mesto.nomoreparties.co/v1/cohort-20/users/me/avatar",
-    headers: {
-        authorization: "4b4ac9ed-5313-4881-afac-1a610d770d12",
-        "Content-Type": "application/json",
-    },
-});
 //userInfo
+const avatarIcon = document.querySelector(".profile__avatarIcon");
 const userInfo = new UserInfo({
     name: nameInput,
     job: jobInput,
+    avatar: avatarIcon,
 });
-//функция редактирования аватара
-const avatarIcon = document.querySelector(".profile__avatarIcon");
-userInfoApi.addProfileInfo().then((res) => {
-    (nameInput.textContent = res.name), (jobInput.textContent = res.about);
-    avatarIcon.src = res.avatar;
-    return (userId = res._id);
-});
+
+api.addProfileInfo()
+    .then((res) => {
+        (nameInput.textContent = res.name), (jobInput.textContent = res.about), (avatarIcon.src = res.avatar);
+        return (userId = res._id);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 //начальное заполнение формы редактирования профиля
 const createCard = (item) => {
-    const card = new Card(item, handleCardClick, ".template", api, userId, like, popupDeleteCard, {
+    const card = new Card(item, handleCardClick, ".template", api, userId, popupDeleteCard, {
         handleDeleteCardClick: () => {
             templateCard = card;
             popupDeleteCard.open(item);
@@ -107,13 +91,15 @@ const cardsList = new Section(
 //Функция сабмита редактирования профиля
 function submitFormEditProfile(formObject) {
     renderLoading(true, loadingBtnSubmitProfile);
-    userInfoApi
-        .editProfileInfo(formObject)
+    api.editProfileInfo(formObject)
         .then((res) => {
             userInfo.setUserInfo({
                 newUser: res.name,
                 newJob: res.about,
             });
+        })
+        .catch((err) => {
+            console.log(err);
         })
         .finally(() => {
             renderLoading(false, loadingBtnSubmitProfile);
@@ -128,6 +114,9 @@ function submitFormAdd(item) {
         .then((res) => {
             cardsList.addItem(createCard(res));
         })
+        .catch((err) => {
+            console.log(err);
+        })
         .finally(() => {
             renderLoading(false, loadingBtnSubmitNewCard);
         });
@@ -136,10 +125,14 @@ function submitFormAdd(item) {
 //функция сабмита редактирования аватара
 function submitFormEditAvatar(data) {
     renderLoading(true, loadingBtnSubmitAvatar);
-    editAvatar
-        .editAvatarIcon(data)
+    api.editAvatarIcon(data)
         .then((res) => {
-            avatarIcon.src = res.avatar;
+            userInfo.setUserAvatar({
+                newAvatar: res.avatar,
+            });
+        })
+        .catch((err) => {
+            console.log(err);
         })
         .finally(() => {
             renderLoading(false, loadingBtnSubmitAvatar);
@@ -209,7 +202,6 @@ openPopupEditAvatar.setEventListeners();
 popupWithImage.setEventListeners();
 openPopupEditProfile.setEventListeners();
 popupWithFormNewCard.setEventListeners();
-
 
 
 

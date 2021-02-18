@@ -1,5 +1,5 @@
 export default class Card {
-    constructor(data, handleCardClick, cardTemplate, api, userID, like, popupDeleteCard, { handleDeleteCardClick }) {
+    constructor(data, handleCardClick, cardTemplate, api, userID, popupDeleteCard, { handleDeleteCardClick }) {
         this._title = data.name;
         this._link = data.link;
         this.focusCard = data._id;
@@ -9,10 +9,8 @@ export default class Card {
         this._cardTemplate = document.querySelector(cardTemplate);
         this._api = api;
         this.userID = userID;
-        this._like = like;
         this._popupDeleteCard = popupDeleteCard;
         this._handleDeleteCardClick = handleDeleteCardClick;
-        
     }
 
     _getTemplate() {
@@ -37,7 +35,7 @@ export default class Card {
     }
 
     _checkMyLike(res) {
-        let userLikeEnablet = res.find((item) => item._id == "ca67b3c561070f21b7e4e0f1");
+        let userLikeEnablet = res.find((item) => item._id == this.userID);
         if (userLikeEnablet) {
             this._element.querySelector(".element__like").classList.add("element__like_active");
             return true;
@@ -54,14 +52,14 @@ export default class Card {
         }
     }
     _likeItem() {
-        this._like.likeCard(this.focusCard).then((res) => {
+        this._api.likeCard(this.focusCard).then((res) => {
             this._element.querySelector(".element__likeSum").textContent = res.likes.length;
             this._element.querySelector(".element__like").classList.add("element__like_active");
             this._likes = res.likes;
         });
     }
     _disLikeItem() {
-        this._like.disLikeCard(this.focusCard).then((res) => {
+        this._api.disLikeCard(this.focusCard).then((res) => {
             this._element.querySelector(".element__likeSum").textContent = res.likes.length;
             this._element.querySelector(".element__like").classList.remove("element__like_active");
             this._likes = res.likes;
@@ -83,6 +81,7 @@ export default class Card {
         return this._element;
     }
 }
+
 
 
 

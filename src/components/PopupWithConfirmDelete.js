@@ -6,7 +6,6 @@ export default class PopupWithConfirmDelete extends Popup {
         this._popupForm = this._popup.querySelector(".popup__form");
         this._submitForm = submitForm;
         this._inputList = this._popup.querySelectorAll(".popup__input");
-        
     }
 
     setEventListeners() {
@@ -27,3 +26,4 @@ export default class PopupWithConfirmDelete extends Popup {
         this._popupForm.reset();
     }
 }
+
